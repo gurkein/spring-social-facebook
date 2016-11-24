@@ -38,7 +38,7 @@ class CommentTemplate implements CommentOperations {
 	}
 
 	public PagedList<Comment> getComments(String objectId, PagingParameters pagedListParameters) {
-		return graphApi.fetchConnections(objectId, "comments", Comment.class, getPagingParameters(pagedListParameters));
+		return graphApi.fetchConnections(objectId, "comments", Comment.class, getPagingParameters(pagedListParameters), ALL_FIELDS);
 	}
 
 	public Comment getComment(String commentId) {
@@ -55,6 +55,6 @@ class CommentTemplate implements CommentOperations {
 		graphApi.delete(objectId);
 	}
 
-	private static final String[] ALL_FIELDS = { "id", "attachment", "can_comment", "can_remove", "comment_count", "created_time", "from", "like_count", "message", "parent", "user_likes" };
+	private static final String[] ALL_FIELDS = { "id", "attachment", "can_comment", "can_remove", "comment_count", "created_time", "from{id,name,picture}", "like_count", "message", "parent", "user_likes" };
 
 }
