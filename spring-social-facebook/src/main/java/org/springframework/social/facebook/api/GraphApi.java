@@ -176,5 +176,5 @@ public interface GraphApi {
 	 * @return The base URL for the Graph API.
 	 */
 	String getBaseGraphApiUrl();
-	
+
 }

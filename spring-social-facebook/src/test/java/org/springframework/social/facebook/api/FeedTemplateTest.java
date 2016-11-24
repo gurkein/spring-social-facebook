@@ -559,10 +559,11 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 	}
 
 	private static final String[] ALL_POST_FIELDS = {
-			"id", "actions", "admin_creator", "application", "caption", "created_time", "description", "from", "icon",
+			"id", "actions", "admin_creator", "application", "caption", "created_time", "description", "from{id,name,picture}", "icon",
 			"is_hidden", "is_published", "link", "message", "message_tags", "name", "object_id", "picture", "place", 
-			"privacy", "properties", "source", "status_type", "story", "to", "type", "updated_time", "with_tags", "shares"
+			"privacy", "properties", "source", "status_type", "story", "to", "type", "updated_time", "with_tags", "shares",
+			"attachments", "likes.limit(0).summary(1)", "comments.limit(0).summary(1)"
 	};
 
-	private static final String ALL_POST_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS).replace(",", "%2C");
+	private static final String ALL_POST_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
 }
