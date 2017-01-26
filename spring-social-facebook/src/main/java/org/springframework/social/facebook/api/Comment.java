@@ -31,7 +31,7 @@ public class Comment extends FacebookObject {
 	private String id;
 	
 	private StoryAttachment attachment;
-	
+
 	private boolean canComment;
 	
 	private boolean canRemove;
@@ -102,26 +102,50 @@ public class Comment extends FacebookObject {
 	}
 	
 	/**
-	 * @return true if the authenticated user is able to comment on this comment
-	 */
-	public boolean canComment() {
-		return canComment;
-	}
-	
-	/**
 	 * @return true if the authenticated user is able to remove this comment
 	 */
+	@Deprecated
 	public boolean canRemove() {
 		return canRemove;
 	}
-	
+
+	/**
+	 * @return true if the authenticated user is able to comment on this comment
+	 */
+	@Deprecated
+	public boolean canComment() {
+		return canComment;
+	}
+
 	/**
 	 * @return true if the authenticated user likes this comment
 	 */
+	@Deprecated
 	public boolean userLikes() {
 		return userLikes;
 	}
-	
+
+	/**
+	 * @return true if the authenticated user is able to comment on this comment
+	 */
+	public boolean isCanComment() {
+		return canComment;
+	}
+
+	/**
+	 * @return true if the authenticated user is able to remove this comment
+	 */
+	public boolean isCanRemove() {
+		return canRemove;
+	}
+
+	/**
+	 * @return true if the authenticated user likes this comment
+	 */
+	public boolean isUserLikes() {
+		return userLikes;
+	}
+
 	/**
 	 * @return an attachment (link, photo, etc) associated with the comment or null if no attachment
 	 */

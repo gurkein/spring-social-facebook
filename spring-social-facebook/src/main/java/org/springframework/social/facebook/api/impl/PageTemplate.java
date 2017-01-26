@@ -20,18 +20,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.core.io.Resource;
-import org.springframework.social.facebook.api.Account;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.FacebookLink;
-import org.springframework.social.facebook.api.GraphApi;
-import org.springframework.social.facebook.api.Page;
-import org.springframework.social.facebook.api.PageAdministrationException;
-import org.springframework.social.facebook.api.PageOperations;
-import org.springframework.social.facebook.api.PagePostData;
-import org.springframework.social.facebook.api.PageUpdate;
-import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+
+import static org.springframework.social.facebook.api.impl.PagedListUtils.getPagingParameters;
 
 class PageTemplate implements PageOperations {
 
@@ -129,7 +122,26 @@ class PageTemplate implements PageOperations {
 		}
 		return accountCache.get(pageId);
 	}
-	
+
+	public PagedList<Conversation> getConversations(String pageId, PagingParameters pagedListParameters) {
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		return graphApi.fetchConnections(pageId, "conversations", Conversation.class, params,
+				"id", "updated_time", "snippet", "message_count", "unread_count", "participants",
+				"senders", "can_reply", "is_subscribed", "link");
+	}
+
+	public PagedList<Message> getConversationMessages(String conversationId, PagingParameters pagedListParameters) {
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		return graphApi.fetchConnections(conversationId, "messages", Message.class, params,
+				"id", "created_time", "from", "message", "subject", "to");
+	}
+
+	public String postConversationMessage(String conversationId, String message) {
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.set("message", message);
+		return graphApi.publish(conversationId, "messages", map);
+	}
+
 	public Facebook facebookOperations(String pageId) {
 		return new FacebookTemplate(getAccessToken(pageId));
 	}

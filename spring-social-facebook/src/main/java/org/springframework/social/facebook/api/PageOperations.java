@@ -22,6 +22,8 @@ import org.springframework.social.ApiException;
 import org.springframework.social.InsufficientPermissionException;
 import org.springframework.social.MissingAuthorizationException;
 
+import java.util.List;
+
 /**
  * Interface defining operations that can be performed on a Facebook pages.
  * @author Craig Walls
@@ -170,7 +172,29 @@ public interface PageOperations {
 	 * @return an {@link Account} object for the given page ID
 	 */
 	Account getAccount(String pageId);
-	
+
+	/**
+	 *
+	 * @param pageId
+	 * @param pagedListParameters
+	 * @return
+	 */
+	PagedList<Conversation> getConversations(String pageId, PagingParameters pagedListParameters);
+
+	/**
+	 *
+	 * @param conversationId
+	 * @return
+	 */
+	PagedList<Message> getConversationMessages(String conversationId, PagingParameters pagedListParameters);
+
+	/**
+	 *
+	 * @param conversationId
+	 * @return
+	 */
+	String postConversationMessage(String conversationId, String message);
+
 	/**
 	 * Returns a {@link Facebook} instance that will act on behalf of the given page.
 	 * @param pageId the page to create a {@link Facebook} instance for.
