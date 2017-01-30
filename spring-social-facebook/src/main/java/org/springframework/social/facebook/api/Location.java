@@ -44,7 +44,11 @@ public class Location extends FacebookObject {
 	private String name;
 	
 	private String region;
-	
+
+	private Location() {
+		this(0, 0);
+	}
+
 	public Location(double latitude, double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
