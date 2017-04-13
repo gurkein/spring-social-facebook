@@ -126,14 +126,14 @@ class PageTemplate implements PageOperations {
 	public PagedList<Conversation> getConversations(String pageId, PagingParameters pagedListParameters) {
 		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
 		return graphApi.fetchConnections(pageId, "conversations", Conversation.class, params,
-				"id", "updated_time", "snippet", "message_count", "unread_count", "participants{id,name,picture}",
-				"senders{id,name,picture}", "can_reply", "is_subscribed", "link");
+				"id", "updated_time", "snippet", "message_count", "unread_count", "participants",
+				"senders", "can_reply", "is_subscribed", "link");
 	}
 
 	public PagedList<Message> getConversationMessages(String conversationId, PagingParameters pagedListParameters) {
 		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
 		return graphApi.fetchConnections(conversationId, "messages", Message.class, params,
-				"id", "created_time", "from{id,name,picture}", "message", "subject", "to{id,name,picture}");
+				"id", "created_time", "from", "message", "subject", "to");
 	}
 
 	public String postConversationMessage(String conversationId, String message) {
