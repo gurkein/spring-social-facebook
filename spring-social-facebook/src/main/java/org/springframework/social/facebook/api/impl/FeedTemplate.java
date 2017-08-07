@@ -153,7 +153,11 @@ class FeedTemplate implements FeedOperations {
 	}
 
 	public Post getPost(String entryId) {
-		ObjectNode responseNode = (ObjectNode) restTemplate.getForObject(graphApi.getBaseGraphApiUrl() + entryId, JsonNode.class);
+		URIBuilder uriBuilder = URIBuilder.fromUri(graphApi.getBaseGraphApiUrl() + entryId);
+		uriBuilder.queryParam("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
+		URI uri = uriBuilder.build();
+
+		ObjectNode responseNode = (ObjectNode) restTemplate.getForObject(uri, JsonNode.class);
 		return deserializePost(null, Post.class, responseNode);
 	}
 
