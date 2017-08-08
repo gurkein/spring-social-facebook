@@ -154,7 +154,7 @@ class FeedTemplate implements FeedOperations {
 
 	public Post getPost(String entryId) {
 		URIBuilder uriBuilder = URIBuilder.fromUri(graphApi.getBaseGraphApiUrl() + entryId);
-		uriBuilder.queryParam("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
+		uriBuilder.queryParam("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS) + "," + StringUtils.arrayToCommaDelimitedString(REACTION_FIELDS));
 		URI uri = uriBuilder.build();
 
 		ObjectNode responseNode = (ObjectNode) restTemplate.getForObject(uri, JsonNode.class);
@@ -295,5 +295,14 @@ class FeedTemplate implements FeedOperations {
 			"privacy", "properties", "source", "status_type", "story", "to", "type", "updated_time", "with_tags", "shares",
 			"attachments", "likes.limit(0).summary(1)", "comments.limit(0).summary(1)"
 	};
+
+	private static final String[] REACTION_FIELDS = {
+			"reactions.type(LIKE).summary(total_count).limit(0).as(reactions_like)",
+			"reactions.type(LOVE).summary(total_count).limit(0).as(reactions_love)",
+			"reactions.type(WOW).summary(total_count).limit(0).as(reactions_wow)",
+			"reactions.type(HAHA).summary(total_count).limit(0).as(reactions_haha)",
+			"reactions.type(THANKFUL).summary(total_count).limit(0).as(reactions_thankful)",
+			"reactions.type(SAD).summary(total_count).limit(0).as(reactions_sad)",
+			"reactions.type(ANGRY).summary(total_count).limit(0).as(reactions_angry)"};
 
 }
