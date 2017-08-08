@@ -177,7 +177,7 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 
 	@Test 
 	public void getFeedEntry() {
-		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR)))
+		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR + "%2C" + REACTION_FIELDS_STR)))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("post"), MediaType.APPLICATION_JSON));
@@ -191,7 +191,7 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 
 	@Test 
 	public void getFeedEntry_noLikes() {
-		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR)))
+		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR + "%2C" + REACTION_FIELDS_STR)))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("post_nolikes"), MediaType.APPLICATION_JSON));
@@ -538,6 +538,16 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 			"privacy", "properties", "source", "status_type", "story", "to", "type", "updated_time", "with_tags", "shares",
 			"attachments", "likes.limit(0).summary(1)", "comments.limit(0).summary(1)"
 	};
+	private static final String[] REACTION_FIELDS = {
+			"reactions.type(LIKE).summary(total_count).limit(0).as(reactions_like)",
+			"reactions.type(LOVE).summary(total_count).limit(0).as(reactions_love)",
+			"reactions.type(WOW).summary(total_count).limit(0).as(reactions_wow)",
+			"reactions.type(HAHA).summary(total_count).limit(0).as(reactions_haha)",
+			"reactions.type(THANKFUL).summary(total_count).limit(0).as(reactions_thankful)",
+			"reactions.type(SAD).summary(total_count).limit(0).as(reactions_sad)",
+			"reactions.type(ANGRY).summary(total_count).limit(0).as(reactions_angry)"};
+
 
 	private static final String ALL_POST_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
+	private static final String REACTION_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(REACTION_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
 }
