@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
 import org.springframework.social.facebook.api.Action;
 import org.springframework.social.facebook.api.MessageTag;
 import org.springframework.social.facebook.api.Page;
@@ -47,6 +48,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInterceptors(beforeDeserialization = RawJsonDeserializationInterceptor.class)
 abstract class PostMixin extends FacebookObjectMixin {
 	
 	@JsonProperty("id")

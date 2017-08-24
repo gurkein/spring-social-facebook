@@ -400,9 +400,10 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements Facebo
 	@Override
 	protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
 		MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
-		objectMapper = new ObjectMapper();				
+		objectMapper = new ObjectMapper();
 		objectMapper.registerModule(new FacebookModule());
-		converter.setObjectMapper(objectMapper);		
+		objectMapper.registerModule(new JsonInterceptorModule());
+		converter.setObjectMapper(objectMapper);
 		return converter;
 	}
 	

@@ -16,7 +16,10 @@
 package org.springframework.social.facebook.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Annotated mixin to add Jackson annotations to FacebookObject. 
@@ -28,4 +31,9 @@ abstract class FacebookObjectMixin {
 	@JsonAnySetter
 	abstract void add(String key, Object value);
 
+	@JsonIgnore
+	abstract JsonNode getRawJson();
+
+	@JsonProperty("rawJson")
+	abstract void setRawJson(JsonNode rawJson);
 }
