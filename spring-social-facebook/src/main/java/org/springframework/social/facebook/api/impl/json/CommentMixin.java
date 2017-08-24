@@ -18,6 +18,7 @@ package org.springframework.social.facebook.api.impl.json;
 import java.util.Date;
 import java.util.List;
 
+import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
 import org.springframework.social.facebook.api.Comment;
 import org.springframework.social.facebook.api.MessageTag;
 import org.springframework.social.facebook.api.Reference;
@@ -31,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInterceptors(beforeDeserialization = RawJsonDeserializationInterceptor.class)
 abstract class CommentMixin extends FacebookObjectMixin {
 
 	@JsonProperty("id")

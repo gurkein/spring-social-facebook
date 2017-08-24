@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Base class for all Facebook types.
@@ -28,6 +29,8 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 public abstract class FacebookObject {
 
 	private Map<String, Object> extraData;
+
+	private JsonNode rawJson;
 
 	public FacebookObject() {
 		this.extraData = new HashMap<String, Object>();
@@ -47,6 +50,14 @@ public abstract class FacebookObject {
 	 */
 	protected void add(String key, Object value) {
 		extraData.put(key, value);
+	}
+
+	public JsonNode getRawJson() {
+		return rawJson;
+	}
+
+	public void setRawJson(JsonNode rawJson) {
+		this.rawJson = rawJson;
 	}
 
 }
