@@ -106,6 +106,12 @@ public interface Facebook extends GraphApi, ApiBinding {
 	 * @return {@link UserOperations}
 	 */
 	UserOperations userOperations();
+
+	/**
+	 * API for performing operations on Instagram Bussiness Account.
+	 * @return {@link UserOperations}
+	 */
+	InstagramOperations instagramOperations();
 	
 	/**
 	 * Returns the underlying {@link RestOperations} object allowing for consumption of Facebook endpoints that may not be otherwise covered by the API binding.

@@ -19,21 +19,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-abstract class AccountMixin extends FacebookObjectMixin {
-	
-	@JsonProperty("id")
-	String id;
+abstract class InstagramBusinessAccountMixin extends FacebookObjectMixin {
 
-	@JsonProperty("name")
-	String name;
-
-	@JsonProperty("category")
-	String category;
-
-	@JsonProperty("access_token")
-	String accessToken;
-
-	@JsonProperty("perms")
-	String permissions;
+    @JsonProperty("id")
+    String id;
 
 }

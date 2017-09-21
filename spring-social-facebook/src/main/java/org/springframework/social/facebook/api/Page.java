@@ -211,6 +211,8 @@ public class Page extends FacebookObject {
 	
 	private String writtenBy;
 
+	private InstagramBusinessAccount instagramBusinessAccount;
+
 	/**
 	 * @return The page's ID.
 	 */
@@ -647,7 +649,10 @@ public class Page extends FacebookObject {
 		return writtenBy;
 	}
 
-	
+	public InstagramBusinessAccount getInstagramBusinessAccount() {
+		return instagramBusinessAccount;
+	}
+
 	public static enum PriceRange {
 		$,$$, $$$, $$$$, UNSPECIFIED;
 	}

@@ -183,6 +183,6 @@ class MediaTemplate implements MediaOperations {
 	
 	static final String[] ALL_PHOTO_FIELDS = {
 			"id", "album", "backdated_time", "backdated_time_granularity", "created_time", "from", "height", "picture",
-			"source", "link", "icon", "images", "name", "page_story_id", "place,updated_time", "tags"
+			"source", "link", "icon", "images", "name", "page_story_id", "place", "updated_time", "tags"
 	};
 }
