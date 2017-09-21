@@ -28,6 +28,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.social.facebook.api.Page.PriceRange;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Craig Walls
@@ -36,7 +37,7 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getPage_place_with_hours() {
-		mockServer.expect(requestTo(fbUrl("220817147947513")))
+		mockServer.expect(requestTo(fbUrl("220817147947513?fields=" + ALL_PAGE_FIELDS_STR)))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("place-with-hours-page"), MediaType.APPLICATION_JSON));
@@ -79,7 +80,7 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getPage_application() {
-		mockServer.expect(requestTo(fbUrl("140372495981006")))
+		mockServer.expect(requestTo(fbUrl("140372495981006?fields=" + ALL_PAGE_FIELDS_STR)))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("application-page"), MediaType.APPLICATION_JSON));
@@ -96,7 +97,7 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void getPage_withExtraData() {
-		mockServer.expect(requestTo(fbUrl("11803178355")))
+		mockServer.expect(requestTo(fbUrl("11803178355?fields=" + ALL_PAGE_FIELDS_STR)))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("page-with-extra-data"), MediaType.APPLICATION_JSON));
@@ -302,5 +303,27 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 		};
 		return video;
 	}
+
+	static final String[] ALL_PAGE_FIELDS = {
+			"id", "about", "access_token", "business", "can_checkin", "can_post", "category", "category_list", "checkins",
+			"country_page_likes", "current_location", "description", "description_html", "emails", "engagement",
+			"fan_count", "general_info", "global_brand_page_name", "global_brand_root_id", "has_added_app",
+			"instagram_business_account", "link", "name", "new_like_count", "parent_page", "phone",
+			"promotion_eligible", "promotion_ineligible_reason", "rating_count", "single_line_address",
+			"talking_about_count", "unread_message_count", "unread_notif_count", "unseen_message_count", "username",
+			"verification_status", "voip_info", "website", "were_here_count",
+			"affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page", "bio",
+			"birthday", "booking_agent", "built", "company_overview", "culinary_team", "directed_by", "features",
+			"food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
+			"mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",
+			"personal_interests", "pharma_safety_info", "place_type", "plot_outline", "press_contact", "price_range",
+			"produced_by", "products", "public_transit", "publisher_space", "record_label", "release_date",
+			"restaurant_services", "restaurant_specialties", "schedule", "screenplay_by", "season", "starring",
+			"store_number", "studio", "written_by", "offer_eligible",
+			"app_id", "hours", "is_community_page", "is_permanently_closed", "is_published", "is_unclaimed"
+	};
+
+	private static final String ALL_PAGE_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(ALL_PAGE_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
+
 
 }

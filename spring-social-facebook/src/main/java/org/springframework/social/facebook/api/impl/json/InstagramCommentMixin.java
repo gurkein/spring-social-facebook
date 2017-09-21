@@ -17,23 +17,29 @@ package org.springframework.social.facebook.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.social.facebook.api.InstagramBusinessAccount;
+import org.springframework.social.facebook.api.InstagramMedia;
+
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-abstract class AccountMixin extends FacebookObjectMixin {
-	
-	@JsonProperty("id")
-	String id;
+abstract class InstagramCommentMixin extends FacebookObjectMixin {
 
-	@JsonProperty("name")
-	String name;
+    @JsonProperty("id")
+    String id;
 
-	@JsonProperty("category")
-	String category;
+    @JsonProperty("hidden")
+    boolean hidden;
 
-	@JsonProperty("access_token")
-	String accessToken;
+    @JsonProperty("media")
+    InstagramMedia media;
 
-	@JsonProperty("perms")
-	String permissions;
+    @JsonProperty("text")
+    String text;
 
+    @JsonProperty("timestamp")
+    Date timestamp;
+
+    @JsonProperty("user")
+    InstagramBusinessAccount user;
 }

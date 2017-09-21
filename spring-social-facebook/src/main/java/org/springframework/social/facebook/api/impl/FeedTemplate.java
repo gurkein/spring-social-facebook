@@ -262,7 +262,7 @@ class FeedTemplate implements FeedOperations {
 		}
 		return "post";
 	}
-	
+
 	private URIBuilder appendPagedListParameters(PagingParameters pagedListParameters,
 			URIBuilder uriBuilder) {
 		if (pagedListParameters.getLimit() != null) {
@@ -285,8 +285,7 @@ class FeedTemplate implements FeedOperations {
 		}
 		return uriBuilder;
 	}
-	
-	
+
 	private static final String[] ALL_POST_FIELDS = {
 			"id", "actions", "admin_creator", "application", "caption", "created_time", "description", "from{id,name,picture}", "icon",
 			"is_hidden", "is_published", "link", "message", "message_tags", "name", "object_id", "picture", "place", 

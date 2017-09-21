@@ -22,6 +22,7 @@ import java.util.Map;
 import org.springframework.social.facebook.api.CoverPhoto;
 import org.springframework.social.facebook.api.Engagement;
 import org.springframework.social.facebook.api.Location;
+import org.springframework.social.facebook.api.InstagramBusinessAccount;
 import org.springframework.social.facebook.api.MailingAddress;
 import org.springframework.social.facebook.api.Page;
 import org.springframework.social.facebook.api.Page.PriceRange;
@@ -329,6 +330,8 @@ abstract class PageMixin extends FacebookObjectMixin {
 	@JsonProperty("written_by")
 	String writtenBy;
 
+	@JsonProperty("instagram_business_account")
+	InstagramBusinessAccount instagramBusinessAccount;
 	
 	static class LocationDeserializer extends JsonDeserializer<Location> {
 		@Override

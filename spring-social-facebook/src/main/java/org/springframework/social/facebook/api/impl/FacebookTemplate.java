@@ -40,6 +40,7 @@ import org.springframework.social.facebook.api.FeedOperations;
 import org.springframework.social.facebook.api.FriendOperations;
 import org.springframework.social.facebook.api.GroupOperations;
 import org.springframework.social.facebook.api.ImageType;
+import org.springframework.social.facebook.api.InstagramOperations;
 import org.springframework.social.facebook.api.LikeOperations;
 import org.springframework.social.facebook.api.MediaOperations;
 import org.springframework.social.facebook.api.OpenGraphOperations;
@@ -82,7 +83,9 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements Facebo
 	private AchievementOperations achievementOperations;
 	
 	private UserOperations userOperations;
-	
+
+	private InstagramOperations instagramOperations;
+
 	private FriendOperations friendOperations;
 	
 	private FeedOperations feedOperations;
@@ -153,7 +156,11 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements Facebo
 	public UserOperations userOperations() {
 		return userOperations;
 	}
-	
+
+	public InstagramOperations instagramOperations() {
+		return instagramOperations;
+	}
+
 	public LikeOperations likeOperations() {
 		return likeOperations;
 	}
@@ -418,6 +425,7 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements Facebo
 		achievementOperations = new AchievementTemplate(this);
 		openGraphOperations = new OpenGraphTemplate(this);
 		userOperations = new UserTemplate(this, getRestTemplate());
+		instagramOperations = new InstagramTemplate(this, getRestTemplate());
 		friendOperations = new FriendTemplate(this, getRestTemplate());
 		feedOperations = new FeedTemplate(this, getRestTemplate(), objectMapper);
 		commentOperations = new CommentTemplate(this);
