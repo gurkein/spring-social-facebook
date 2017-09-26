@@ -18,6 +18,7 @@ package org.springframework.social.facebook.api;
 import org.springframework.social.ApiException;
 import org.springframework.social.InsufficientPermissionException;
 import org.springframework.social.MissingAuthorizationException;
+import org.springframework.util.StringUtils;
 
 public interface InstagramOperations {
 
@@ -167,17 +168,17 @@ public interface InstagramOperations {
      */
     void deleteComment(String commentId);
 
-    static final String[] ALL_PROFILE_FIELDS = {
+    static final String[] BASIC_PROFILE_FIELDS = {
             "biography", "id", "ig_id", "followers_count", "follows_count", "media_count", "name", "profile_picture_url", "username", "website"
     };
 
-    static final String[] ALL_MEDIA_FIELDS = {
+    static final String[] BASIC_MEDIA_FIELDS = {
             "caption", "comments_count", "id", "ig_id", "like_count", "media_type", "media_url", "owner", "permalink",
             "shortcode", "thumbnail_url", "timestamp", "is_comment_enabled"
     };
 
-    static final String[] ALL_COMMENT_FIELDS = {
-            "hidden", "id", "media", "text", "timestamp", "user"
+    static final String[] BASIC_COMMENT_FIELDS = {
+            "hidden", "id", "media", "text", "timestamp", "user{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}"
     };
 
 }

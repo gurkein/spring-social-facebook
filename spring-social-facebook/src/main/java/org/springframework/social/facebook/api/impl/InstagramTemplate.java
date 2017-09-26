@@ -35,48 +35,48 @@ class InstagramTemplate implements InstagramOperations {
     }
 
     public InstagramUser getUserProfile(String userId) {
-        return graphApi.fetchObject(userId, InstagramUser.class, ALL_PROFILE_FIELDS);
+        return graphApi.fetchObject(userId, InstagramUser.class, BASIC_PROFILE_FIELDS);
     }
 
     public PagedList<InstagramMedia> getMedia(String ownerId) {
-        return graphApi.fetchConnections(ownerId, "media", InstagramMedia.class, ALL_MEDIA_FIELDS);
+        return graphApi.fetchConnections(ownerId, "media", InstagramMedia.class, BASIC_MEDIA_FIELDS);
     }
 
     public PagedList<InstagramMedia> getMedia(String ownerId, PagingParameters pagedListParameters) {
         MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
-        params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_MEDIA_FIELDS));
+        params.set("fields", StringUtils.arrayToCommaDelimitedString(BASIC_MEDIA_FIELDS));
         return graphApi.fetchConnections(ownerId, "media", InstagramMedia.class, params);
     }
 
     public InstagramMedia getSingleMedia(String mediaId) {
-        return graphApi.fetchObject(mediaId, InstagramMedia.class, ALL_MEDIA_FIELDS);
+        return graphApi.fetchObject(mediaId, InstagramMedia.class, BASIC_MEDIA_FIELDS);
     }
 
     public PagedList<InstagramComment> getComments(String mediaId) {
-        return graphApi.fetchConnections(mediaId, "comments", InstagramComment.class, ALL_COMMENT_FIELDS);
+        return graphApi.fetchConnections(mediaId, "comments", InstagramComment.class, BASIC_COMMENT_FIELDS);
     }
 
     public PagedList<InstagramComment> getComments(String mediaId, PagingParameters pagedListParameters) {
         MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
-        params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_COMMENT_FIELDS));
+        params.set("fields", StringUtils.arrayToCommaDelimitedString(BASIC_COMMENT_FIELDS));
         return graphApi.fetchConnections(mediaId, "comments", InstagramComment.class, params);
     }
 
     public InstagramComment getComment(String commentId) {
-        return graphApi.fetchObject(commentId, InstagramComment.class, ALL_COMMENT_FIELDS);
+        return graphApi.fetchObject(commentId, InstagramComment.class, BASIC_COMMENT_FIELDS);
     }
 
     public PagedList<InstagramMedia> getCarouselChildren(String mediaId) {
-        return graphApi.fetchConnections(mediaId, "children", InstagramMedia.class, ALL_MEDIA_FIELDS);
+        return graphApi.fetchConnections(mediaId, "children", InstagramMedia.class, BASIC_MEDIA_FIELDS);
     }
 
     public PagedList<InstagramMedia> getStories(String ownerId) {
-        return graphApi.fetchConnections(ownerId, "stories", InstagramMedia.class, ALL_MEDIA_FIELDS);
+        return graphApi.fetchConnections(ownerId, "stories", InstagramMedia.class, BASIC_MEDIA_FIELDS);
     }
 
     public PagedList<InstagramMedia> getStories(String ownerId, PagingParameters pagedListParameters) {
         MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
-        params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_MEDIA_FIELDS));
+        params.set("fields", StringUtils.arrayToCommaDelimitedString(BASIC_MEDIA_FIELDS));
         return graphApi.fetchConnections(ownerId, "stories", InstagramMedia.class, params);
     }
 
