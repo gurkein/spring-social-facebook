@@ -17,12 +17,14 @@ package org.springframework.social.facebook.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.social.facebook.api.InstagramBusinessAccount;
+import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
 import org.springframework.social.facebook.api.InstagramMedia;
+import org.springframework.social.facebook.api.InstagramUser;
 
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInterceptors(beforeDeserialization = RawJsonDeserializationInterceptor.class)
 abstract class InstagramCommentMixin extends FacebookObjectMixin {
 
     @JsonProperty("id")
@@ -41,5 +43,5 @@ abstract class InstagramCommentMixin extends FacebookObjectMixin {
     Date timestamp;
 
     @JsonProperty("user")
-    InstagramBusinessAccount user;
+    InstagramUser user;
 }

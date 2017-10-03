@@ -14,7 +14,7 @@ public class InstagramComment extends FacebookObject {
 
     private Date timestamp;
 
-    private InstagramBusinessAccount user;
+    private InstagramUser user;
 
     public String getId() {
         return id;
@@ -36,7 +36,7 @@ public class InstagramComment extends FacebookObject {
         return timestamp;
     }
 
-    public InstagramBusinessAccount getUser() {
+    public InstagramUser getUser() {
         return user;
     }
 }

@@ -173,12 +173,12 @@ public interface InstagramOperations {
     };
 
     static final String[] BASIC_MEDIA_FIELDS = {
-            "caption", "comments_count", "id", "ig_id", "like_count", "media_type", "media_url", "owner", "permalink",
+            "caption", "comments_count", "id", "ig_id", "like_count", "media_type", "media_url", "owner{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}", "permalink",
             "shortcode", "thumbnail_url", "timestamp", "is_comment_enabled"
     };
 
     static final String[] BASIC_COMMENT_FIELDS = {
-            "hidden", "id", "media", "text", "timestamp", "user{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}"
+            "hidden", "id", "media{id,ig_id,owner{id,ig_id,username}}", "text", "timestamp", "user{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}"
     };
 
 }

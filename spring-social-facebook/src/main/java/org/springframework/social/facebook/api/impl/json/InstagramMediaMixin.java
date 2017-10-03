@@ -17,6 +17,7 @@ package org.springframework.social.facebook.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
 import org.springframework.social.facebook.api.Comment;
 import org.springframework.social.facebook.api.InstagramMedia;
 import org.springframework.social.facebook.api.InstagramUser;
@@ -25,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInterceptors(beforeDeserialization = RawJsonDeserializationInterceptor.class)
 abstract class InstagramMediaMixin extends FacebookObjectMixin {
 
     @JsonProperty("id")
@@ -38,6 +40,9 @@ abstract class InstagramMediaMixin extends FacebookObjectMixin {
 
     @JsonProperty("media_type")
     String mediaType;
+
+    @JsonProperty("media_url")
+    String mediaUrl;
 
     @JsonProperty("owner")
     InstagramUser owner;
@@ -55,10 +60,10 @@ abstract class InstagramMediaMixin extends FacebookObjectMixin {
     Date timestamp;
 
     @JsonProperty("comments_count")
-    int commentsCount;
+    Integer commentsCount;
 
     @JsonProperty("like_count")
-    int likeCount;
+    Integer likeCount;
 
     @JsonProperty("children")
     List<InstagramMedia> children;
