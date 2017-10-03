@@ -26,11 +26,11 @@ public class InstagramUser extends FacebookObject implements Serializable {
 
 	private String igId;
 
-	private int followersCount;
+	private Integer followersCount;
 
-	private int followsCount;
+	private Integer followsCount;
 
-	private int mediaCount;
+	private Integer mediaCount;
 
 	private String name;
 
@@ -48,15 +48,15 @@ public class InstagramUser extends FacebookObject implements Serializable {
 		return igId;
 	}
 
-	public int getFollowersCount() {
+	public Integer getFollowersCount() {
 		return followersCount;
 	}
 
-	public int getFollowsCount() {
+	public Integer getFollowsCount() {
 		return followsCount;
 	}
 
-	public int getMediaCount() {
+	public Integer getMediaCount() {
 		return mediaCount;
 	}
 

@@ -31,13 +31,13 @@ abstract class InstagramUserMixin extends FacebookObjectMixin {
     String igId;
 
     @JsonProperty("followers_count")
-    int followersCount;
+    Integer followersCount;
 
     @JsonProperty("follows_count")
-    int followsCount;
+    Integer followsCount;
 
     @JsonProperty("media_count")
-    int mediaCount;
+    Integer mediaCount;
 
     @JsonProperty("name")
     String name;

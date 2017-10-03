@@ -13,6 +13,8 @@ public class InstagramMedia extends FacebookObject {
 
     private String mediaType;
 
+    private String mediaUrl;
+
     private InstagramUser owner;
 
     private String permalink;
@@ -23,9 +25,9 @@ public class InstagramMedia extends FacebookObject {
 
     private Date timestamp;
 
-    private int commentsCount;
+    private Integer commentsCount;
 
-    private int likeCount;
+    private Integer likeCount;
 
     private boolean isCommentEnabled;
 
@@ -49,6 +51,10 @@ public class InstagramMedia extends FacebookObject {
         return mediaType;
     }
 
+    public String getMediaUrl() {
+        return mediaUrl;
+    }
+
     public InstagramUser getOwner() {
         return owner;
     }
@@ -69,11 +75,11 @@ public class InstagramMedia extends FacebookObject {
         return timestamp;
     }
 
-    public int getCommentsCount() {
+    public Integer getCommentsCount() {
         return commentsCount;
     }
 
-    public int getLikeCount() {
+    public Integer getLikeCount() {
         return likeCount;
     }
 
