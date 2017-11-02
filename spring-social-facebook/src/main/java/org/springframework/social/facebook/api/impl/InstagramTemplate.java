@@ -82,13 +82,13 @@ class InstagramTemplate implements InstagramOperations {
 
     public void toggleComments(String mediaId, boolean enabled) {
         MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
-        params.set("comment_enabled", enabled);
+        params.set("comment_enabled", Boolean.toString(enabled));
         graphApi.post(mediaId, params);
     }
 
     public void hideComment(String commentId, boolean hidden) {
         MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
-        params.set("hide", hidden);
+        params.set("hide", Boolean.toString(hidden));
         graphApi.post(commentId, params);
     }
 
