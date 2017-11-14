@@ -1,5 +1,7 @@
 package org.springframework.social.facebook.api;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+
 import java.util.Date;
 import java.util.List;
 
@@ -87,8 +89,24 @@ public class InstagramMedia extends FacebookObject {
         return children;
     }
 
+    public void setChildren(List<InstagramMedia> children) {
+        this.children = children;
+        if (getRawJson() != null && !getRawJson().has("children")) {
+            ArrayNode childrenNode = (ArrayNode) getRawJson().withArray("children");
+            for (InstagramMedia child : children) {
+                if (child.getRawJson() != null) {
+                    childrenNode.add(child.getRawJson());
+                }
+            }
+        }
+    }
+
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public boolean isCommentEnabled() {
