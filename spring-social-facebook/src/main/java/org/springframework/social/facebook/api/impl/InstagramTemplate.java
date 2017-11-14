@@ -67,7 +67,7 @@ class InstagramTemplate implements InstagramOperations {
     }
 
     public PagedList<InstagramMedia> getCarouselChildren(String mediaId) {
-        return graphApi.fetchConnections(mediaId, "children", InstagramMedia.class, BASIC_MEDIA_FIELDS);
+        return graphApi.fetchConnections(mediaId, "children", InstagramMedia.class, BASIC_CAROUSEL_FIELDS);
     }
 
     public PagedList<InstagramMedia> getStories(String ownerId) {
