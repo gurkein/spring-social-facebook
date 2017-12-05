@@ -186,6 +186,10 @@ public class Post extends FacebookObject {
 		return type;
 	}
 
+	public void setType(PostType type) {
+		this.type = type;
+	}
+
 	public Date getUpdatedTime() {
 		return updatedTime;
 	}

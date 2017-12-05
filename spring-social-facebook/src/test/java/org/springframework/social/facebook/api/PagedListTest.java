@@ -20,6 +20,7 @@ import java.util.List;
 import org.junit.Test;
 
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
@@ -33,11 +34,11 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  */
 public class PagedListTest extends AbstractFacebookApiTest {
 
-	private static final String FIELDS_PARAM = "&fields=id%2Cactions%2Cadmin_creator%2Capplication%2Ccaption%2Ccreated_time%2Cdescription%2Cfrom%7Bid%2Cname%2Cpicture%7D%2Cicon%2Cis_hidden%2Cis_published%2Clink%2Cmessage%2Cmessage_tags%2Cname%2Cobject_id%2Cpicture%2Cplace%2Cprivacy%2Cproperties%2Csource%2Cstatus_type%2Cstory%2Cto%2Ctype%2Cupdated_time%2Cwith_tags%2Cshares%2Cattachments%2Clikes.limit%280%29.summary%281%29%2Ccomments.limit%280%29.summary%281%29";
+	private static final String ALL_POST_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(FeedOperations.ALL_POST_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
 
 	@Test
 	public void getFeedPaged() {
-		mockServer.expect(requestTo(fbUrl("me/feed?limit=2" + FIELDS_PARAM)))
+		mockServer.expect(requestTo(fbUrl("me/feed?limit=2&fields=" + ALL_POST_FIELDS_STR)))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("feedPage1"), MediaType.APPLICATION_JSON));

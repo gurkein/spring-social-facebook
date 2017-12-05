@@ -558,22 +558,6 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 		assertEquals(toDate("2011-03-28T14:50:27+0000"), statuses.get(2).getUpdatedTime());
 	}
 
-	private static final String[] ALL_POST_FIELDS = {
-			"id", "actions", "admin_creator", "application", "caption", "created_time", "description", "from{id,name,picture}", "icon",
-			"is_hidden", "is_published", "link", "message", "message_tags", "name", "object_id", "picture", "place", 
-			"privacy", "properties", "source", "status_type", "story", "to", "type", "updated_time", "with_tags", "shares",
-			"attachments", "likes.limit(0).summary(1)", "comments.limit(0).summary(1)"
-	};
-	private static final String[] REACTION_FIELDS = {
-			"reactions.type(LIKE).summary(total_count).limit(0).as(reactions_like)",
-			"reactions.type(LOVE).summary(total_count).limit(0).as(reactions_love)",
-			"reactions.type(WOW).summary(total_count).limit(0).as(reactions_wow)",
-			"reactions.type(HAHA).summary(total_count).limit(0).as(reactions_haha)",
-			"reactions.type(THANKFUL).summary(total_count).limit(0).as(reactions_thankful)",
-			"reactions.type(SAD).summary(total_count).limit(0).as(reactions_sad)",
-			"reactions.type(ANGRY).summary(total_count).limit(0).as(reactions_angry)"};
-
-
-	private static final String ALL_POST_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
-	private static final String REACTION_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(REACTION_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
+	private static final String ALL_POST_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(FeedOperations.ALL_POST_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
+	private static final String REACTION_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(FeedOperations.REACTION_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
 }
