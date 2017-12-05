@@ -182,6 +182,10 @@ public interface InstagramOperations {
     };
 
     static final String[] BASIC_COMMENT_FIELDS = {
+            "hidden", "id", "media{id,ig_id,owner{id,username}}", "text", "timestamp", "user{id,username}"
+    };
+
+    static final String[] ALL_COMMENT_FIELDS = {
             "hidden", "id", "media{id,ig_id,owner{id,ig_id,username}}", "text", "timestamp", "user{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}"
     };
 

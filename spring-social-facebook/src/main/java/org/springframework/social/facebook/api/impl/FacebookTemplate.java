@@ -76,7 +76,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
  * </p>
  * @author Craig Walls
  */
-public class FacebookTemplate extends AbstractOAuth2ApiBinding implements Facebook {
+public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Facebook {
 
 	private String appId;
 	
@@ -425,9 +425,9 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements Facebo
 		achievementOperations = new AchievementTemplate(this);
 		openGraphOperations = new OpenGraphTemplate(this);
 		userOperations = new UserTemplate(this, getRestTemplate());
-		instagramOperations = new InstagramTemplate(this, getRestTemplate());
+		instagramOperations = new InstagramTemplate(this);
 		friendOperations = new FriendTemplate(this, getRestTemplate());
-		feedOperations = new FeedTemplate(this, getRestTemplate(), objectMapper);
+		feedOperations = new FeedTemplate(this);
 		commentOperations = new CommentTemplate(this);
 		likeOperations = new LikeTemplate(this);
 		eventOperations = new EventTemplate(this);

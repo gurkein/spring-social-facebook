@@ -17,30 +17,16 @@ package org.springframework.social.facebook.api.impl;
 
 import static org.springframework.social.facebook.api.impl.PagedListUtils.*;
 
-import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.facebook.api.FacebookLink;
 import org.springframework.social.facebook.api.FeedOperations;
 import org.springframework.social.facebook.api.GraphApi;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.PagingParameters;
 import org.springframework.social.facebook.api.Post;
-import org.springframework.social.facebook.api.Post.PostType;
 import org.springframework.social.facebook.api.PostData;
-import org.springframework.social.support.URIBuilder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.RestTemplate;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 class FeedTemplate implements FeedOperations {
 
@@ -48,14 +34,8 @@ class FeedTemplate implements FeedOperations {
 
 	private final GraphApi graphApi;
 	
-	private ObjectMapper objectMapper;
-	
-	private final RestTemplate restTemplate;
-
-	public FeedTemplate(GraphApi graphApi, RestTemplate restTemplate, ObjectMapper objectMapper) {
+	public FeedTemplate(GraphApi graphApi) {
 		this.graphApi = graphApi;
-		this.restTemplate = restTemplate;
-		this.objectMapper = objectMapper;
 	}
 
 	public PagedList<Post> getFeed() {
@@ -71,8 +51,9 @@ class FeedTemplate implements FeedOperations {
 	}
 		
 	public PagedList<Post> getFeed(String ownerId, PagingParameters pagedListParameters) {
-		JsonNode responseNode = fetchConnectionList(graphApi.getBaseGraphApiUrl() + ownerId + "/feed", pagedListParameters);
-		return deserializeList(responseNode, null, Post.class);
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
+		return graphApi.fetchConnections(ownerId, "feed", Post.class, params);
 	}
 
 	public PagedList<Post> getHomeFeed() {
@@ -80,8 +61,9 @@ class FeedTemplate implements FeedOperations {
 	}
 	
 	public PagedList<Post> getHomeFeed(PagingParameters pagedListParameters) {
-		JsonNode responseNode = fetchConnectionList(graphApi.getBaseGraphApiUrl() + "me/home", pagedListParameters);
-		return deserializeList(responseNode, null, Post.class);
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
+		return graphApi.fetchConnections("me", "home", Post.class, params);
 	}
 
 	public PagedList<Post> getStatuses() {
@@ -97,8 +79,9 @@ class FeedTemplate implements FeedOperations {
 	}
 	
 	public PagedList<Post> getStatuses(String userId, PagingParameters pagedListParameters) {
-		JsonNode responseNode = fetchConnectionList(graphApi.getBaseGraphApiUrl() + userId + "/statuses", pagedListParameters);
-		return deserializeList(responseNode, "status", Post.class);
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
+		return overridePostType(graphApi.fetchConnections(userId, "statuses", Post.class, params), Post.PostType.STATUS);
 	}
 
 	public PagedList<Post> getLinks() {
@@ -114,8 +97,9 @@ class FeedTemplate implements FeedOperations {
 	}
 	
 	public PagedList<Post> getLinks(String ownerId, PagingParameters pagedListParameters) {
-		JsonNode responseNode = fetchConnectionList(graphApi.getBaseGraphApiUrl() + ownerId + "/links", pagedListParameters);
-		return deserializeList(responseNode, "link", Post.class);
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
+		return overridePostType(graphApi.fetchConnections(ownerId, "links", Post.class, params), Post.PostType.LINK);
 	}
 
 	public PagedList<Post> getPosts() {
@@ -131,8 +115,9 @@ class FeedTemplate implements FeedOperations {
 	}
 	
 	public PagedList<Post> getPosts(String ownerId, PagingParameters pagedListParameters) {
-		JsonNode responseNode = fetchConnectionList(graphApi.getBaseGraphApiUrl() + ownerId + "/posts", pagedListParameters);
-		return deserializeList(responseNode, null, Post.class);
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
+		return graphApi.fetchConnections(ownerId, "posts", Post.class, params);
 	}
 
 	public PagedList<Post> getTagged() {
@@ -148,17 +133,15 @@ class FeedTemplate implements FeedOperations {
 	}
 	
 	public PagedList<Post> getTagged(String ownerId, PagingParameters pagedListParameters) {
-		JsonNode responseNode = fetchConnectionList(graphApi.getBaseGraphApiUrl() + ownerId + "/tagged", pagedListParameters);
-		return deserializeList(responseNode, null, Post.class);
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
+		return graphApi.fetchConnections(ownerId, "tagged", Post.class, params);
 	}
 
 	public Post getPost(String entryId) {
-		URIBuilder uriBuilder = URIBuilder.fromUri(graphApi.getBaseGraphApiUrl() + entryId);
-		uriBuilder.queryParam("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS) + "," + StringUtils.arrayToCommaDelimitedString(REACTION_FIELDS));
-		URI uri = uriBuilder.build();
-
-		ObjectNode responseNode = (ObjectNode) restTemplate.getForObject(uri, JsonNode.class);
-		return deserializePost(null, Post.class, responseNode);
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS) + "," + StringUtils.arrayToCommaDelimitedString(REACTION_FIELDS));
+		return graphApi.fetchObject(entryId, Post.class, params);
 	}
 
 	public String updateStatus(String message) {
@@ -206,100 +189,12 @@ class FeedTemplate implements FeedOperations {
 	public Post getCheckin(String checkinId) {
 		return graphApi.fetchObject(checkinId, Post.class);
 	}
+
+	private PagedList<Post> overridePostType(PagedList<Post> posts, Post.PostType type) {
+		for (Post post : posts) {
+			post.setType(type);
+		}
+		return posts;
+	}
 	
-	// private helpers
-	
-	private JsonNode fetchConnectionList(String baseUri, PagingParameters pagedListParameters) {
-		URIBuilder uriBuilder = URIBuilder.fromUri(baseUri);
-		uriBuilder = appendPagedListParameters(pagedListParameters, uriBuilder);
-		uriBuilder.queryParam("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
-		URI uri = uriBuilder.build();
-		JsonNode responseNode = restTemplate.getForObject(uri, JsonNode.class);
-		return responseNode;
-	}
-
-	private <T> PagedList<T> deserializeList(JsonNode jsonNode, String postType, Class<T> type) {
-		JsonNode dataNode = jsonNode.get("data");
-		List<T> posts = new ArrayList<T>();
-		for (Iterator<JsonNode> iterator = dataNode.iterator(); iterator.hasNext();) {
-			posts.add(deserializePost(postType, type, (ObjectNode) iterator.next()));
-		}
-		if (jsonNode.has("paging")) {
-			JsonNode pagingNode = jsonNode.get("paging");
-			PagingParameters previousPage = getPagedListParameters(pagingNode, "previous");
-			PagingParameters nextPage = getPagedListParameters(pagingNode, "next");
-			return new PagedList<T>(posts, previousPage, nextPage);
-		}
-		
-		return new PagedList<T>(posts, null, null);
-	}
-
-	private <T> T deserializePost(String postType, Class<T> type, ObjectNode node) {
-		try {
-			if (postType == null) {
-				postType = determinePostType(node);
-			}
-			
-			// Must have separate postType field for polymorphic deserialization. If we key off of the "type" field, then it will
-			// be null when trying to deserialize the type property.
-			node.put("postType", postType); // used for polymorphic deserialization
-			node.put("type", postType); // used to set Post's type property
-			return objectMapper.reader(type).readValue(node.toString()); // TODO: EXTREMELY HACKY--TEMPORARY UNTIL I FIGURE OUT HOW JACKSON 2 DOES THIS
-		} catch (IOException shouldntHappen) {
-			throw new UncategorizedApiException("facebook", "Error deserializing " + postType + " post", shouldntHappen);
-		}
-	}
-
-	private String determinePostType(ObjectNode node) {
-		if (node.has("type")) {
-			try {
-				String type = node.get("type").textValue();
-				PostType.valueOf(type.toUpperCase());
-				return type;
-			} catch (IllegalArgumentException e) {
-				return "post";
-			}
-		}
-		return "post";
-	}
-
-	private URIBuilder appendPagedListParameters(PagingParameters pagedListParameters,
-			URIBuilder uriBuilder) {
-		if (pagedListParameters.getLimit() != null) {
-			uriBuilder = uriBuilder.queryParam("limit", String.valueOf(pagedListParameters.getLimit()));
-		}
-		if (pagedListParameters.getSince() != null) {
-			uriBuilder = uriBuilder.queryParam("since", String.valueOf(pagedListParameters.getSince()));
-		}
-		if (pagedListParameters.getUntil() != null) {
-			uriBuilder = uriBuilder.queryParam("until", String.valueOf(pagedListParameters.getUntil()));
-		}
-		if (pagedListParameters.getAfter() != null) {
-			uriBuilder = uriBuilder.queryParam("after", String.valueOf(pagedListParameters.getAfter()));
-		}
-		if (pagedListParameters.getBefore() != null) {
-			uriBuilder = uriBuilder.queryParam("before", String.valueOf(pagedListParameters.getBefore()));
-		}
-		if (pagedListParameters.getPagingToken() != null) {
-			uriBuilder = uriBuilder.queryParam("__paging_token", String.valueOf(pagedListParameters.getPagingToken()));
-		}
-		return uriBuilder;
-	}
-
-	private static final String[] ALL_POST_FIELDS = {
-			"id", "actions", "admin_creator", "application", "caption", "created_time", "description", "from{id,name,picture}", "icon",
-			"is_hidden", "is_published", "link", "message", "message_tags", "name", "object_id", "picture", "place", 
-			"privacy", "properties", "source", "status_type", "story", "to", "type", "updated_time", "with_tags", "shares",
-			"attachments", "likes.limit(0).summary(1)", "comments.limit(0).summary(1)"
-	};
-
-	private static final String[] REACTION_FIELDS = {
-			"reactions.type(LIKE).summary(total_count).limit(0).as(reactions_like)",
-			"reactions.type(LOVE).summary(total_count).limit(0).as(reactions_love)",
-			"reactions.type(WOW).summary(total_count).limit(0).as(reactions_wow)",
-			"reactions.type(HAHA).summary(total_count).limit(0).as(reactions_haha)",
-			"reactions.type(THANKFUL).summary(total_count).limit(0).as(reactions_thankful)",
-			"reactions.type(SAD).summary(total_count).limit(0).as(reactions_sad)",
-			"reactions.type(ANGRY).summary(total_count).limit(0).as(reactions_angry)"};
-
 }

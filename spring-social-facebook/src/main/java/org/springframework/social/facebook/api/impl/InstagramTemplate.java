@@ -19,7 +19,6 @@ import org.springframework.social.facebook.api.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.RestTemplate;
 
 import static org.springframework.social.facebook.api.impl.PagedListUtils.getPagingParameters;
 
@@ -27,11 +26,8 @@ class InstagramTemplate implements InstagramOperations {
 
     private final GraphApi graphApi;
 
-    private final RestTemplate restTemplate;
-
-    public InstagramTemplate(GraphApi graphApi, RestTemplate restTemplate) {
+    public InstagramTemplate(GraphApi graphApi) {
         this.graphApi = graphApi;
-        this.restTemplate = restTemplate;
     }
 
     public InstagramUser getUserProfile(String userId) {
