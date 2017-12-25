@@ -16,18 +16,23 @@
 package org.springframework.social.facebook.api.impl;
 
 import org.springframework.social.facebook.api.*;
-import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.social.support.URIBuilder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
 
 import static org.springframework.social.facebook.api.impl.PagedListUtils.getPagingParameters;
 
 class InstagramTemplate implements InstagramOperations {
 
     private final GraphApi graphApi;
+    private final RestTemplate restTemplate;
 
-    public InstagramTemplate(GraphApi graphApi) {
+    public InstagramTemplate(GraphApi graphApi, RestTemplate restTemplate) {
         this.graphApi = graphApi;
+        this.restTemplate = restTemplate;
     }
 
     public InstagramUser getUserProfile(String userId) {
@@ -77,15 +82,15 @@ class InstagramTemplate implements InstagramOperations {
     }
 
     public void toggleComments(String mediaId, boolean enabled) {
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
-        params.set("comment_enabled", Boolean.toString(enabled));
-        graphApi.post(mediaId, params);
+        URI uri = URIBuilder.fromUri(graphApi.getBaseGraphApiUrl() + mediaId)
+                .queryParam("comment_enabled", Boolean.toString(enabled)).build();
+        restTemplate.postForObject(uri, null, String.class);
     }
 
     public void hideComment(String commentId, boolean hidden) {
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
-        params.set("hide", Boolean.toString(hidden));
-        graphApi.post(commentId, params);
+        URI uri = URIBuilder.fromUri(graphApi.getBaseGraphApiUrl() + commentId)
+                .queryParam("hide", Boolean.toString(hidden)).build();
+        restTemplate.postForObject(uri, null, String.class);
     }
 
     public void deleteComment(String commentId) {

@@ -47,6 +47,12 @@ abstract class CommentMixin extends FacebookObjectMixin {
 	@JsonProperty("can_remove")
 	boolean canRemove;
 	
+	@JsonProperty("is_hidden")
+	boolean hidden;
+
+	@JsonProperty("can_hide")
+	boolean canHide;
+
 	@JsonProperty("comment_count")
 	Integer commentCount;
 	
