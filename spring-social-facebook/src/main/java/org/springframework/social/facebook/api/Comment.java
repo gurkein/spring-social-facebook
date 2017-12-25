@@ -35,7 +35,11 @@ public class Comment extends FacebookObject {
 	private boolean canComment;
 	
 	private boolean canRemove;
-	
+
+	private boolean hidden;
+
+	private boolean canHide;
+
 	private Integer commentCount;
 	
 	private Date createdTime;
@@ -144,6 +148,14 @@ public class Comment extends FacebookObject {
 	 */
 	public boolean isUserLikes() {
 		return userLikes;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	public boolean isCanHide() {
+		return canHide;
 	}
 
 	/**

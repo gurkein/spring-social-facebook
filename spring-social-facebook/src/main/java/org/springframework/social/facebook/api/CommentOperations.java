@@ -71,4 +71,9 @@ public interface CommentOperations {
 	 */
 	void deleteComment(String commentId);
 
+	void hideComment(String commentId, boolean hide);
+
+	static final String[] ALL_COMMENT_FIELDS = { "id", "attachment", "can_comment", "can_remove", "comment_count", "created_time", "from{id,name,picture}", "like_count", "message", "parent", "user_likes", "is_hidden" };
+
+
 }

@@ -22,15 +22,21 @@ import org.springframework.social.facebook.api.CommentOperations;
 import org.springframework.social.facebook.api.GraphApi;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.PagingParameters;
+import org.springframework.social.support.URIBuilder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
 
 class CommentTemplate implements CommentOperations {
 
 	private final GraphApi graphApi;
+	private final RestTemplate restTemplate;
 
-	public CommentTemplate(GraphApi graphApi) {
+	public CommentTemplate(GraphApi graphApi, RestTemplate restTemplate) {
 		this.graphApi = graphApi;
+		this.restTemplate = restTemplate;
 	}
 
 	public PagedList<Comment> getComments(String objectId) {
@@ -38,11 +44,11 @@ class CommentTemplate implements CommentOperations {
 	}
 
 	public PagedList<Comment> getComments(String objectId, PagingParameters pagedListParameters) {
-		return graphApi.fetchConnections(objectId, "comments", Comment.class, getPagingParameters(pagedListParameters), ALL_FIELDS);
+		return graphApi.fetchConnections(objectId, "comments", Comment.class, getPagingParameters(pagedListParameters), ALL_COMMENT_FIELDS);
 	}
 
 	public Comment getComment(String commentId) {
-		return graphApi.fetchObject(commentId, Comment.class, ALL_FIELDS);
+		return graphApi.fetchObject(commentId, Comment.class, ALL_COMMENT_FIELDS);
 	}
 
 	public String addComment(String objectId, String message) {
@@ -55,6 +61,10 @@ class CommentTemplate implements CommentOperations {
 		graphApi.delete(objectId);
 	}
 
-	private static final String[] ALL_FIELDS = { "id", "attachment", "can_comment", "can_remove", "comment_count", "created_time", "from{id,name,picture}", "like_count", "message", "parent", "user_likes" };
+	public void hideComment(String commentId, boolean hidden) {
+		URI uri = URIBuilder.fromUri(graphApi.getBaseGraphApiUrl() + commentId)
+				.queryParam("is_hidden", Boolean.toString(hidden)).build();
+		restTemplate.postForObject(uri, null, String.class);
+	}
 
 }

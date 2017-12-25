@@ -424,10 +424,10 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Faceb
 		achievementOperations = new AchievementTemplate(this);
 		openGraphOperations = new OpenGraphTemplate(this);
 		userOperations = new UserTemplate(this, getRestTemplate());
-		instagramOperations = new InstagramTemplate(this);
+		instagramOperations = new InstagramTemplate(this, getRestTemplate());
 		friendOperations = new FriendTemplate(this, getRestTemplate());
 		feedOperations = new FeedTemplate(this);
-		commentOperations = new CommentTemplate(this);
+		commentOperations = new CommentTemplate(this, getRestTemplate());
 		likeOperations = new LikeTemplate(this);
 		eventOperations = new EventTemplate(this);
 		mediaOperations = new MediaTemplate(this, getRestTemplate());
