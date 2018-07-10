@@ -326,7 +326,7 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 			"promotion_eligible", "promotion_ineligible_reason", "rating_count", "single_line_address",
 			"talking_about_count", "unread_message_count", "unread_notif_count", "unseen_message_count", "username",
 			"verification_status", "voip_info", "website", "were_here_count",
-			"affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page", "bio",
+			"affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page",
 			"birthday", "booking_agent", "built", "company_overview", "culinary_team", "directed_by", "features",
 			"food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
 			"mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",

@@ -27,6 +27,16 @@ import org.springframework.http.MediaType;
 
 public class FriendTemplateTest extends AbstractFacebookApiTest {
 
+	private static String PROFILE_FIELDS;
+
+	static {
+		StringBuilder builder = new StringBuilder(UserOperations.PROFILE_FIELDS[0]);
+		for (int i=1; i < UserOperations.PROFILE_FIELDS.length; i++) {
+			builder.append("%2C").append(UserOperations.PROFILE_FIELDS[i]);
+		}
+		PROFILE_FIELDS = builder.toString();
+	}
+
 	@Test
 	public void getFriendLists() {
 		mockServer.expect(requestTo(facebook.getBaseGraphApiUrl() + "me/friendlists"))
@@ -95,7 +105,7 @@ public class FriendTemplateTest extends AbstractFacebookApiTest {
 	
 	@Test
 	public void getFriendProfiles() {
-		mockServer.expect(requestTo(facebook.getBaseGraphApiUrl() + "me/friends?fields=id%2Cname%2Cfirst_name%2Clast_name%2Cgender%2Clocale%2Ceducation%2Cwork%2Cemail%2Cthird_party_id%2Clink%2Ctimezone%2Cupdated_time%2Cverified%2Cabout%2Cbirthday%2Clocation%2Chometown%2Cinterested_in%2Creligion%2Cpolitical%2Cquotes%2Crelationship_status%2Csignificant_other%2Cwebsite"))
+		mockServer.expect(requestTo(facebook.getBaseGraphApiUrl() + "me/friends?fields=" + PROFILE_FIELDS))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("user-profiles"), MediaType.APPLICATION_JSON));
@@ -106,7 +116,7 @@ public class FriendTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getFriendProfiles_forSpecificUser() {
-		mockServer.expect(requestTo(facebook.getBaseGraphApiUrl() + "1234567/friends?fields=id%2Cname%2Cfirst_name%2Clast_name%2Cgender%2Clocale%2Ceducation%2Cwork%2Cemail%2Cthird_party_id%2Clink%2Ctimezone%2Cupdated_time%2Cverified%2Cabout%2Cbirthday%2Clocation%2Chometown%2Cinterested_in%2Creligion%2Cpolitical%2Cquotes%2Crelationship_status%2Csignificant_other%2Cwebsite"))
+		mockServer.expect(requestTo(facebook.getBaseGraphApiUrl() + "1234567/friends?fields=" + PROFILE_FIELDS))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("user-profiles"), MediaType.APPLICATION_JSON));

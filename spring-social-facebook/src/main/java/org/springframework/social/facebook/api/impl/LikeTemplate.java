@@ -15,13 +15,9 @@
  */
 package org.springframework.social.facebook.api.impl;
 
-import org.springframework.social.facebook.api.GraphApi;
-import org.springframework.social.facebook.api.LikeOperations;
-import org.springframework.social.facebook.api.Page;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.PagingParameters;
-import org.springframework.social.facebook.api.Reference;
+import org.springframework.social.facebook.api.*;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.StringUtils;
 
 class LikeTemplate implements LikeOperations {
 
@@ -143,5 +139,5 @@ class LikeTemplate implements LikeOperations {
 		return graphApi.fetchConnections(userId, "games", Page.class, pagingParameters.toMap(), PAGE_FIELDS);
 	}
 
-	private static final String PAGE_FIELDS = "id,name,category,description,location,website,picture,phone,affiliation,company_overview,fan_count,checkins,cover";
+	private static final String PAGE_FIELDS = StringUtils.arrayToCommaDelimitedString(PageOperations.BASIC_PAGE_FIELDS);
 }

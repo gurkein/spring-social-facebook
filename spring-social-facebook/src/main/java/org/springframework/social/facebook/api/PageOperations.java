@@ -202,6 +202,12 @@ public interface PageOperations {
 	 */
 	Facebook facebookOperations(String pageId);
 
+
+	static final String[] BASIC_PAGE_FIELDS = {
+			"id", "name", "category", "description", "location", "website", "picture", "phone",
+			"affiliation", "company_overview", "fan_count", "checkins", "cover"
+	};
+
 	static final String[] ALL_PAGE_FIELDS = {
 			"id", "about", "access_token", "business", "can_checkin", "can_post", "category", "category_list", "checkins",
 			"country_page_likes", "current_location", "description", "description_html", "emails", "engagement",
@@ -210,7 +216,7 @@ public interface PageOperations {
 			"promotion_eligible", "promotion_ineligible_reason", "rating_count", "single_line_address",
 			"talking_about_count", "unread_message_count", "unread_notif_count", "unseen_message_count", "username",
 			"verification_status", "voip_info", "website", "were_here_count",
-			"affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page", "bio",
+			"affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page",
 			"birthday", "booking_agent", "built", "company_overview", "culinary_team", "directed_by", "features",
 			"food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
 			"mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",

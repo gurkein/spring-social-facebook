@@ -127,12 +127,22 @@ public interface UserOperations {
 	PagedList<Reference> search(String query);
 	
 	static final String[] PROFILE_FIELDS = {
-		"id", "about", "age_range", "birthday", "context", "cover", "currency", "devices", "education", "email", 
-		"favorite_athletes", "favorite_teams", "first_name", "gender", "hometown", "inspirational_people", "installed", "install_type",
-		"is_verified", "languages", "last_name", "link", "locale", "location", "meeting_for", "middle_name", "name", "name_format", 
+		"id", "about", "birthday", "context", "cover", "currency", "devices", "education", "email",
+		"favorite_athletes", "favorite_teams", "first_name", "hometown", "inspirational_people", "installed", "install_type",
+		"is_verified", "languages", "last_name", "locale", "location", "meeting_for", "middle_name", "name", "name_format",
 		"political", "quotes", "payment_pricepoints", "relationship_status", "religion", "security_settings", "significant_other",
 		"sports", "test_group", "timezone", "third_party_id", "updated_time", "verified", "video_upload_limits", "viewer_can_send_gift", 
 		"website", "work"
+	};
+
+	static final String[] PROFILE_FIELDS_WITH_PERMISSION = {
+		"age_range", "gender", "link"
+	};
+
+	// probably returns no data
+	static final String[] DEPRECATED_PROFILE_FIELDS = {
+		"about", "cover", "currency", "devices", "education", "interested_in", "is_verified", "locale", "political",
+		"relationship_status", "religion", "third_party_id", "timezone", "updated_time", "verified", "website", "work"
 	};
 
 }
