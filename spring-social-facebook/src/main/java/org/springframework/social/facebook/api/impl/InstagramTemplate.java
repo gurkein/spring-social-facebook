@@ -63,6 +63,12 @@ class InstagramTemplate implements InstagramOperations {
         return graphApi.fetchConnections(mediaId, "comments", InstagramComment.class, params);
     }
 
+    public PagedList<InstagramComment> getReplies(String commentId, PagingParameters pagedListParameters) {
+        MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+        params.set("fields", StringUtils.arrayToCommaDelimitedString(BASIC_COMMENT_FIELDS));
+        return graphApi.fetchConnections(commentId, "replies", InstagramComment.class, params);
+    }
+
     public InstagramComment getComment(String commentId) {
         return graphApi.fetchObject(commentId, InstagramComment.class, BASIC_COMMENT_FIELDS);
     }

@@ -44,4 +44,10 @@ abstract class InstagramCommentMixin extends FacebookObjectMixin {
 
     @JsonProperty("user")
     InstagramUser user;
+
+    @JsonProperty("username")
+    String username;
+
+    @JsonProperty("like_count")
+    long likeCount;
 }

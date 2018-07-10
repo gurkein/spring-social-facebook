@@ -16,6 +16,10 @@ public class InstagramComment extends FacebookObject {
 
     private InstagramUser user;
 
+    private String username;
+
+    private long likeCount;
+
     public String getId() {
         return id;
     }
@@ -38,5 +42,13 @@ public class InstagramComment extends FacebookObject {
 
     public InstagramUser getUser() {
         return user;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public long getLikeCount() {
+        return likeCount;
     }
 }
