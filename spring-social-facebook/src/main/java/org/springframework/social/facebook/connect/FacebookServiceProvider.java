@@ -29,7 +29,7 @@ public class FacebookServiceProvider extends AbstractOAuth2ServiceProvider<Faceb
 
 	private String appNamespace;
 	
-	private static final String API_VERSION = "2.6";
+	private static final String API_VERSION = "2.7";
 
 	private static final String GRAPH_API_URL = "https://graph.facebook.com/v" + API_VERSION + "/";
 

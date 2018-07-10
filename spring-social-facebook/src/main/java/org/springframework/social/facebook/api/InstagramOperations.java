@@ -34,7 +34,7 @@ public interface InstagramOperations {
     /**
      * Retrieves recent Media entries for a given Instagram Business Account.
      * Returns up to the most recent 25 media.
-     * Requires "instagram_basic, instagram_manage_comments, manage_pages" permission to read media.
+     * Requires "instagram_basic, manage_pages" permission to read media.
      *
      * @param ownerId the Instagram Business Account ID.
      * @return a list of {@link InstagramMedia}s for the specified user.
@@ -44,9 +44,8 @@ public interface InstagramOperations {
     PagedList<InstagramMedia> getMedia(String ownerId);
 
     /**
-     * Retrieves recent Media entries for a given Instagram Business Account.
-     * Returns up to the most recent 25 media.
-     * Requires "instagram_basic, instagram_manage_comments, manage_pages" permission to read media.
+     * Retrieves Media entries for a given Instagram Business Account.
+     * Requires "instagram_basic, manage_pages" permission to read media.
      *
      * @param ownerId             the Instagram Business Account ID.
      * @param pagedListParameters the parameters defining the bounds of the list to return.
@@ -78,8 +77,7 @@ public interface InstagramOperations {
     PagedList<InstagramComment> getComments(String mediaId);
 
     /**
-     * Retrieves recent comments for a given media.
-     * Returns up to the most recent 25 comments.
+     * Retrieves comments for a given media.
      * Requires "instagram_basic, instagram_manage_comments" permission to read comments.
      *
      * @param mediaId             the media ID.
@@ -89,6 +87,18 @@ public interface InstagramOperations {
      * @throws MissingAuthorizationException if FacebookTemplate was not created with an access token.
      */
     PagedList<InstagramComment> getComments(String mediaId, PagingParameters pagedListParameters);
+
+    /**
+     * Retrieves replies for a given top level comment.
+     * Requires "instagram_basic, instagram_manage_comments" permission to read comments.
+     *
+     * @param commentId           the comment ID.
+     * @param pagedListParameters the parameters defining the bounds of the list to return.
+     * @return a list of {@link InstagramComment}s for the specified user.
+     * @throws ApiException                  if there is an error while communicating with Facebook.
+     * @throws MissingAuthorizationException if FacebookTemplate was not created with an access token.
+     */
+    PagedList<InstagramComment> getReplies(String commentId, PagingParameters pagedListParameters);
 
     /**
      * Retrieves a single comment.
@@ -182,11 +192,11 @@ public interface InstagramOperations {
     };
 
     static final String[] BASIC_COMMENT_FIELDS = {
-            "hidden", "id", "media{id,ig_id,owner{id,username}}", "text", "timestamp", "user{id,username}"
+            "hidden", "id", "media{id,ig_id,owner{id,username}}", "text", "timestamp", "user{id,username}", "like_count", "username"
     };
 
     static final String[] ALL_COMMENT_FIELDS = {
-            "hidden", "id", "media{id,ig_id,owner{id,ig_id,username}}", "text", "timestamp", "user{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}"
+            "hidden", "id", "media{id,ig_id,owner{id,ig_id,username}}", "text", "timestamp", "user{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}", "like_count", "username"
     };
 
 }

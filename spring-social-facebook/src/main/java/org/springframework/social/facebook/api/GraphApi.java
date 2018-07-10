@@ -181,6 +181,6 @@ public interface GraphApi {
 	 * @deprecated Use getBaseGraphApiUrl() instead.
 	 */
 	@Deprecated
-	static final String GRAPH_API_URL = "https://graph.facebook.com/v2.6/";
+	static final String GRAPH_API_URL = "https://graph.facebook.com/v2.7/";
 
 }
