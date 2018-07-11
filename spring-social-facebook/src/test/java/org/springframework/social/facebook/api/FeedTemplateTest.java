@@ -177,7 +177,7 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 
 	@Test 
 	public void getFeedEntry() {
-		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR + "%2C" + REACTION_FIELDS_STR)))
+		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR)))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("post"), MediaType.APPLICATION_JSON));
@@ -191,7 +191,7 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 
 	@Test 
 	public void getFeedEntry_noLikes() {
-		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR + "%2C" + REACTION_FIELDS_STR)))
+		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR)))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("post_nolikes"), MediaType.APPLICATION_JSON));
@@ -559,5 +559,4 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 	}
 
 	private static final String ALL_POST_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(FeedOperations.ALL_POST_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
-	private static final String REACTION_FIELDS_STR = StringUtils.arrayToCommaDelimitedString(FeedOperations.REACTION_FIELDS).replace(",", "%2C").replace("(", "%28").replace(")", "%29").replace("{", "%7B").replace("}", "%7D");
 }
