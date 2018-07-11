@@ -140,7 +140,7 @@ class FeedTemplate implements FeedOperations {
 
 	public Post getPost(String entryId) {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS) + "," + StringUtils.arrayToCommaDelimitedString(REACTION_FIELDS));
+		params.set("fields", StringUtils.arrayToCommaDelimitedString(ALL_POST_FIELDS));
 		return graphApi.fetchObject(entryId, Post.class, params);
 	}
 
