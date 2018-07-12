@@ -78,12 +78,12 @@ class InstagramTemplate implements InstagramOperations {
     }
 
     public PagedList<InstagramMedia> getStories(String ownerId) {
-        return graphApi.fetchConnections(ownerId, "stories", InstagramMedia.class, BASIC_MEDIA_FIELDS);
+        return graphApi.fetchConnections(ownerId, "stories", InstagramMedia.class, BASIC_STORY_FIELDS);
     }
 
     public PagedList<InstagramMedia> getStories(String ownerId, PagingParameters pagedListParameters) {
         MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
-        params.set("fields", StringUtils.arrayToCommaDelimitedString(BASIC_MEDIA_FIELDS));
+        params.set("fields", StringUtils.arrayToCommaDelimitedString(BASIC_STORY_FIELDS));
         return graphApi.fetchConnections(ownerId, "stories", InstagramMedia.class, params);
     }
 

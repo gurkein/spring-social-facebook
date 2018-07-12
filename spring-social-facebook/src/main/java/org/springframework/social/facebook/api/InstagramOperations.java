@@ -187,6 +187,10 @@ public interface InstagramOperations {
             "shortcode", "thumbnail_url", "timestamp", "is_comment_enabled"
     };
 
+    static final String[] BASIC_STORY_FIELDS = {
+            "caption", "id", "ig_id", "media_type", "media_url", "owner{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}", "permalink", "shortcode", "thumbnail_url", "timestamp"
+    };
+
     static final String[] BASIC_CAROUSEL_FIELDS = {
             "id", "ig_id", "media_type", "media_url", "permalink", "shortcode", "thumbnail_url", "timestamp"
     };
