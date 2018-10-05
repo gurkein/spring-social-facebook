@@ -112,7 +112,7 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Faceb
 
 	private String applicationNamespace;
 
-	private String apiVersion = "2.7";
+	private String apiVersion = "2.8";
 	
 	/**
 	 * Create a new instance of FacebookTemplate.
