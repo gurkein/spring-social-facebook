@@ -317,7 +317,7 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 			"food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
 			"mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",
 			"personal_interests", "pharma_safety_info", "place_type", "plot_outline", "press_contact", "price_range",
-			"produced_by", "products", "public_transit", "publisher_space", "record_label", "release_date",
+			"produced_by", "products", "public_transit", "record_label", "release_date",
 			"restaurant_services", "restaurant_specialties", "schedule", "screenplay_by", "season", "starring",
 			"store_number", "studio", "written_by", "offer_eligible",
 			"app_id", "hours", "is_community_page", "is_permanently_closed", "is_published", "is_unclaimed"

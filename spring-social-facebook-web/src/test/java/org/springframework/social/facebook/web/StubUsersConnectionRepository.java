@@ -55,7 +55,6 @@ public class StubUsersConnectionRepository implements UsersConnectionRepository 
 		return connectionRepository;
 	}
 
-	@Override
 	public void setConnectionSignUp(ConnectionSignUp connectionSignUp) {
 
 	}
