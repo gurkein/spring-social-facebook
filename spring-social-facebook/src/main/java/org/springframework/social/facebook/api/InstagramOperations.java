@@ -56,6 +56,18 @@ public interface InstagramOperations {
     PagedList<InstagramMedia> getMedia(String ownerId, PagingParameters pagedListParameters);
 
     /**
+     * Retrieves Tagged Media entries for a given Instagram Business Account.
+     * Requires "instagram_basic, instagram_manage_comments" permission to read media.
+     *
+     * @param ownerId             the Instagram Business Account ID.
+     * @param pagedListParameters the parameters defining the bounds of the list to return.
+     * @return a list of {@link InstagramMedia}s for the specified user.
+     * @throws ApiException                  if there is an error while communicating with Facebook.
+     * @throws MissingAuthorizationException if FacebookTemplate was not created with an access token.
+     */
+    PagedList<InstagramMedia> getTaggedMedia(String ownerId, PagingParameters pagedListParameters);
+
+    /**
      * Retrieves a single media.
      *
      * @param mediaId the media ID.
@@ -184,7 +196,11 @@ public interface InstagramOperations {
 
     static final String[] BASIC_MEDIA_FIELDS = {
             "caption", "comments_count", "id", "ig_id", "like_count", "media_type", "media_url", "owner{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}", "permalink",
-            "shortcode", "thumbnail_url", "timestamp", "is_comment_enabled"
+            "shortcode", "thumbnail_url", "timestamp", "is_comment_enabled", "children{id,media_url,media_type,thumbnail_url}"
+    };
+
+    static final String[] SHADOW_MEDIA_FIELDS = {
+            "caption", "comments_count", "id", "like_count", "media_type", "media_url", "timestamp", "username", "children{id,media_url,media_type}"
     };
 
     static final String[] BASIC_STORY_FIELDS = {

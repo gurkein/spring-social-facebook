@@ -19,6 +19,8 @@ public class InstagramMedia extends FacebookObject {
 
     private InstagramUser owner;
 
+    private String username;
+
     private String permalink;
 
     private String shortcode;
@@ -59,6 +61,10 @@ public class InstagramMedia extends FacebookObject {
 
     public InstagramUser getOwner() {
         return owner;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getPermalink() {

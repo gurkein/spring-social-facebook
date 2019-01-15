@@ -307,7 +307,18 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Faceb
 		JsonNode pagingNode = jsonNode.get("paging");
 		PagingParameters previousPage = getPagedListParameters(pagingNode, "previous");
 		PagingParameters nextPage = getPagedListParameters(pagingNode, "next");
-		
+		if (nextPage == null && previousPage == null && pagingNode != null && pagingNode.has("cursors")) {
+			JsonNode cursorNode = pagingNode.get("cursors");
+			if (cursorNode.has("after")) {
+				nextPage = new PagingParameters(null, null, null, null,
+						cursorNode.get("after").asText(), null);;
+			}
+			if (cursorNode.has("before")) {
+				previousPage = new PagingParameters(null, null, null, null,
+						null, cursorNode.get("before").asText());;
+			}
+		}
+
 		Integer totalCount = null;
 		if (jsonNode.has("summary")) {
 			JsonNode summaryNode = jsonNode.get("summary");
