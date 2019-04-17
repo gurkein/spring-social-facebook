@@ -22,8 +22,6 @@ import org.springframework.social.ApiException;
 import org.springframework.social.InsufficientPermissionException;
 import org.springframework.social.MissingAuthorizationException;
 
-import java.util.List;
-
 /**
  * Interface defining operations that can be performed on a Facebook pages.
  * @author Craig Walls
@@ -181,12 +179,27 @@ public interface PageOperations {
 	 */
 	PagedList<Conversation> getConversations(String pageId, PagingParameters pagedListParameters);
 
+
+	/**
+	 *
+	 * @param conversationId
+	 * @return
+	 */
+	Conversation getConversation(String conversationId);
+
 	/**
 	 *
 	 * @param conversationId
 	 * @return
 	 */
 	PagedList<Message> getConversationMessages(String conversationId, PagingParameters pagedListParameters);
+
+	/**
+	 *
+	 * @param messageId
+	 * @return
+	 */
+	Message getMessage(String messageId);
 
 	/**
 	 *
@@ -202,22 +215,38 @@ public interface PageOperations {
 	 */
 	Facebook facebookOperations(String pageId);
 
-	static final String[] ALL_PAGE_FIELDS = {
-			"id", "about", "access_token", "business", "can_checkin", "can_post", "category", "category_list", "checkins",
-			"country_page_likes", "current_location", "description", "description_html", "emails", "engagement",
-			"fan_count", "general_info", "global_brand_page_name", "global_brand_root_id", "has_added_app",
-			"instagram_business_account", "link", "name", "new_like_count", "parent_page", "phone",
-			"promotion_eligible", "promotion_ineligible_reason", "rating_count", "single_line_address",
-			"talking_about_count", "unread_message_count", "unread_notif_count", "unseen_message_count", "username",
-			"verification_status", "voip_info", "website", "were_here_count",
-			"affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page", "bio",
-			"birthday", "booking_agent", "built", "company_overview", "culinary_team", "directed_by", "features",
-			"food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
-			"mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",
-			"personal_interests", "pharma_safety_info", "place_type", "plot_outline", "press_contact", "price_range",
-			"produced_by", "products", "public_transit", "record_label", "release_date",
-			"restaurant_services", "restaurant_specialties", "schedule", "screenplay_by", "season", "starring",
-			"store_number", "studio", "written_by", "offer_eligible",
-			"app_id", "hours", "is_community_page", "is_permanently_closed", "is_published", "is_unclaimed"
+
+    static final String[] BASIC_PAGE_FIELDS = {
+            "id", "name", "category", "description", "location", "website", "picture", "phone",
+            "affiliation", "company_overview", "fan_count", "checkins", "cover"
+    };
+
+    static final String[] ALL_PAGE_FIELDS = {
+            "id", "about", "access_token", "business", "can_checkin", "can_post", "category", "category_list", "checkins",
+            "country_page_likes", "current_location", "description", "description_html", "emails", "engagement",
+            "fan_count", "general_info", "global_brand_page_name", "global_brand_root_id", "has_added_app",
+            "instagram_business_account", "link", "name", "new_like_count", "parent_page", "phone",
+            "promotion_eligible", "promotion_ineligible_reason", "rating_count", "single_line_address",
+            "talking_about_count", "unread_message_count", "unread_notif_count", "unseen_message_count", "username",
+            "verification_status", "voip_info", "website", "were_here_count",
+            "affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page",
+            "birthday", "booking_agent", "built", "company_overview", "culinary_team", "directed_by", "features",
+            "food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
+            "mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",
+            "personal_interests", "pharma_safety_info", "place_type", "plot_outline", "press_contact", "price_range",
+            "produced_by", "products", "public_transit", "record_label", "release_date",
+            "restaurant_services", "restaurant_specialties", "schedule", "screenplay_by", "season", "starring",
+            "store_number", "studio", "written_by", "offer_eligible",
+            "app_id", "hours", "is_community_page", "is_permanently_closed", "is_published", "is_unclaimed"
+    };
+
+    static final String[] ALL_CONVERSATION_FIELDS = {
+			"id", "updated_time", "snippet", "message_count", "unread_count", "participants",
+			"senders", "can_reply", "is_subscribed", "link"
+	};
+
+    static final String[] ALL_MESSAGE_FIELDS = {
+			"id", "created_time", "from", "message", "to", "sticker", "tags",
+			"attachments{id,image_data,mime_type,name,size,video_data,file_url}", "shares{id,link,description,name}"
 	};
 }

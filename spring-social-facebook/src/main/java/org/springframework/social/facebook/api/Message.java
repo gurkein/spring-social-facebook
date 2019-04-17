@@ -13,6 +13,7 @@ public class Message extends FacebookObject {
     private Date createdTime;
     private Reference from;
     private String message;
+    @Deprecated
     private String subject;
     private List<Reference> to;
 

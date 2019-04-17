@@ -333,4 +333,13 @@ public interface MediaOperations {
 	 */
 	void tagVideo(String videoId, String userId);
 
+	static final String[] ALL_ALBUM_FIELDS = {
+			"id", "can_upload", "count", "cover_photo", "created_time", "description", "from", "link", "location",
+			"name", "place", "privacy", "type", "updated_time"
+	};
+
+	static final String[] ALL_PHOTO_FIELDS = {
+			"id", "album", "backdated_time", "backdated_time_granularity", "created_time", "from", "height", "picture",
+			"source", "link", "icon", "images", "name", "page_story_id", "place", "updated_time", "tags"
+	};
 }

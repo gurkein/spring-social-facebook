@@ -31,6 +31,7 @@ public class User extends FacebookObject implements Serializable {
 
 	private String id;
 
+	@Deprecated
 	private String about;
 	
 	private Location address;
@@ -38,13 +39,17 @@ public class User extends FacebookObject implements Serializable {
 	private AgeRange ageRange = AgeRange.UNKNOWN;
 
 	private String birthday;
-	
+
+	@Deprecated
 	private CoverPhoto cover;
-	
+
+	@Deprecated
 	private Currency currency;
-	
+
+	@Deprecated
 	private List<Device> devices;
-	
+
+	@Deprecated
 	private List<EducationExperience> education;
 	
 	private String email;
@@ -64,7 +69,8 @@ public class User extends FacebookObject implements Serializable {
 	private boolean installed;
 	
 	private String installType;
-	
+
+	@Deprecated
 	private List<String> interestedIn;
 
 	private boolean isIdentityVerified;
@@ -75,6 +81,7 @@ public class User extends FacebookObject implements Serializable {
 
 	private String link;
 
+	@Deprecated
 	private Locale locale;
 
 	private Reference location;
@@ -89,12 +96,15 @@ public class User extends FacebookObject implements Serializable {
 	
 	private PaymentPricePoints paymentPricePoints;
 
+	@Deprecated
 	private String political;
 
 	private String quotes;
 
+	@Deprecated
 	private String relationshipStatus;
 
+	@Deprecated
 	private String religion;
 
 	private SecuritySettings securitySettings;
@@ -104,19 +114,24 @@ public class User extends FacebookObject implements Serializable {
 	private List<Experience> sports;
 	
 	private int testGroup;
-	
+
+	@Deprecated
 	private String thirdPartyId;
 
+	@Deprecated
 	private Float timezone;
 	
 	private Date updatedTime;
 
+	@Deprecated
 	private Boolean verified;
 
 	private boolean viewerCanSendGift;
-	
+
+	@Deprecated
 	private String website;
 
+	@Deprecated
 	private List<WorkEntry> work;
 	
 	private VideoUploadLimits videoUploadLimits;

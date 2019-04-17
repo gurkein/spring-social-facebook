@@ -176,11 +176,5 @@ public interface GraphApi {
 	 * @return The base URL for the Graph API.
 	 */
 	String getBaseGraphApiUrl();
-	
-	/**
-	 * @deprecated Use getBaseGraphApiUrl() instead.
-	 */
-	@Deprecated
-	static final String GRAPH_API_URL = "https://graph.facebook.com/v2.8/";
 
 }

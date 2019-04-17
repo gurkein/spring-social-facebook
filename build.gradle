@@ -24,8 +24,14 @@ configure(allprojects - docProjects) {
 
     group = 'org.springframework.social'
 
-    sourceCompatibility=1.5
-    targetCompatibility=1.5
+    compileJava {
+        sourceCompatibility=1.8
+        targetCompatibility=1.8
+    }
+    compileTestJava {
+        sourceCompatibility=1.8
+        targetCompatibility=1.8
+    }
 
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
 

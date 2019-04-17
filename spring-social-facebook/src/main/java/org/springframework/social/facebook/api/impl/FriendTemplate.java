@@ -19,19 +19,11 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.social.facebook.api.FamilyMember;
-import org.springframework.social.facebook.api.FriendList;
-import org.springframework.social.facebook.api.FriendOperations;
-import org.springframework.social.facebook.api.GraphApi;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.PagingParameters;
-import org.springframework.social.facebook.api.Reference;
-import org.springframework.social.facebook.api.User;
-import org.springframework.social.facebook.api.UserInvitableFriend;
-import org.springframework.social.facebook.api.UserTaggableFriend;
+import org.springframework.social.facebook.api.*;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -120,6 +112,6 @@ class FriendTemplate implements FriendOperations {
 				"id", "name" ,"picture", "first_name", "last_name", "middle_name");  
 	}
 	
-	private static final String FULL_PROFILE_FIELDS = "id,name,first_name,last_name,gender,locale,education,work,email,third_party_id,link,timezone,updated_time,verified,about,birthday,location,hometown,interested_in,religion,political,quotes,relationship_status,significant_other,website";
+	private static final String FULL_PROFILE_FIELDS = StringUtils.arrayToCommaDelimitedString(UserOperations.PROFILE_FIELDS);
 
 }

@@ -15,12 +15,10 @@
  */
 package org.springframework.social.facebook.api;
 
-import java.util.List;
-
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
 
-
+import java.util.List;
 
 public interface UserOperations {
 
@@ -126,17 +124,21 @@ public interface UserOperations {
 	 */
 	PagedList<Reference> search(String query);
 
-	static final String[] PROFILE_FIELDS = {
-		"id", "about", "birthday", "context", "cover", "currency", "devices", "education", "email",
-		"favorite_athletes", "favorite_teams", "first_name", "hometown", "inspirational_people", "installed", "install_type",
-		"is_verified", "languages", "last_name", "locale", "location", "meeting_for", "middle_name", "name", "name_format",
-		"political", "quotes", "payment_pricepoints", "relationship_status", "religion", "security_settings", "significant_other",
-		"sports", "test_group", "timezone", "third_party_id", "updated_time", "verified", "video_upload_limits", "viewer_can_send_gift",
-		"website", "work"
-	};
+    static final String[] PROFILE_FIELDS = {
+            "id", "address", "birthday", "context", "email", "favorite_athletes", "favorite_teams", "first_name", "hometown",
+            "inspirational_people", "installed", "install_type", "languages", "last_name", "location", "meeting_for",
+            "middle_name", "name", "name_format", "quotes", "payment_pricepoints", "security_settings",
+            "significant_other", "sports", "test_group", "video_upload_limits", "viewer_can_send_gift",
+            // deprecated
+            "cover", "currency", "devices", "is_verified", "locale", "timezone", "updated_time", "verified",
+            // returns no data as of April 4, 2018
+            "about", "education", "interested_in", "political", "relationship_status", "religion", "third_party_id",
+            "website", "work"
+    };
 
-	static final String[] PROFILE_FIELDS_WITH_PERMISSION = {
-		"age_range", "gender", "link"
-	};
+    static final String[] PROFILE_FIELDS_WITH_PERMISSION = {
+            // requires extra permission
+            "age_range", "gender", "link"
+    };
 
 }

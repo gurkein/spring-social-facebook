@@ -46,7 +46,7 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 		assertEquals("220817147947513", page.getId());
 		assertEquals("Denton Square Donuts", page.getName());
 		assertEquals("https://www.facebook.com/DentonSquareDonuts", page.getLink());
-		assertEquals(3078, page.getLikes());
+		assertEquals(3078, page.getFanCount());
 		assertEquals("Restaurant/cafe", page.getCategory());
 		assertEquals("www.dsdonuts.com", page.getWebsite());
 		assertEquals("Denton", page.getLocation().getCity());
@@ -224,6 +224,20 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 		mockServer.verify();
 	}
 
+	@Test
+	public void postMessage_withTargetAudience() throws Exception {
+		expectFetchAccounts();
+		String requestBody = "message=Hello+Facebook+World&targeting=%7B%27value%27%3A+%27CUSTOM%27%2C%27countries%27%3A%27PE%27%7D&access_token=pageAccessToken";
+		mockServer.expect(requestTo(fbUrl("987654321/feed")))
+				.andExpect(method(POST))
+				.andExpect(header("Authorization", "OAuth someAccessToken"))
+				.andExpect(content().string(requestBody))
+				.andRespond(withSuccess("{\"id\":\"123456_78901234\"}", MediaType.APPLICATION_JSON));
+
+		assertEquals("123456_78901234", facebook.pageOperations().post(new PagePostData("987654321").message("Hello Facebook World").targeting(new Targeting().countries("PE"))));
+		mockServer.verify();
+	}
+
 	@Test(expected = PageAdministrationException.class)
 	public void postLink_notAdmin() throws Exception {
 		expectFetchAccounts();
@@ -312,7 +326,7 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 			"promotion_eligible", "promotion_ineligible_reason", "rating_count", "single_line_address",
 			"talking_about_count", "unread_message_count", "unread_notif_count", "unseen_message_count", "username",
 			"verification_status", "voip_info", "website", "were_here_count",
-			"affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page", "bio",
+			"affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page",
 			"birthday", "booking_agent", "built", "company_overview", "culinary_team", "directed_by", "features",
 			"food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
 			"mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",

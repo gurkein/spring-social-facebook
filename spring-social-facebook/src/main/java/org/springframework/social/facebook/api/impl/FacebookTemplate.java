@@ -29,6 +29,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.UncategorizedApiException;
@@ -51,6 +52,7 @@ import org.springframework.social.facebook.api.SocialContextOperations;
 import org.springframework.social.facebook.api.TestUserOperations;
 import org.springframework.social.facebook.api.UserOperations;
 import org.springframework.social.facebook.api.impl.json.FacebookModule;
+import org.springframework.social.facebook.security.FacebookAppSecretProofInterceptor;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.social.support.ClientHttpRequestFactorySelector;
@@ -79,7 +81,11 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Facebook {
 
 	private String appId;
-	
+
+	private String appSecret;
+
+	private String accessToken;
+
 	private AchievementOperations achievementOperations;
 	
 	private UserOperations userOperations;
@@ -112,7 +118,7 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Faceb
 
 	private String applicationNamespace;
 
-	private String apiVersion = "2.8";
+	private String apiVersion = DEFAULT_API_VERSION;
 	
 	/**
 	 * Create a new instance of FacebookTemplate.
@@ -128,10 +134,20 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Faceb
 	}
 	
 	public FacebookTemplate(String accessToken, String applicationNamespace, String appId) {
+		this(accessToken, applicationNamespace, appId, null);
+	}
+
+	public FacebookTemplate(String accessToken, String applicationNamespace, String appId, String appSecret) {
 		super(accessToken);
+		this.appSecret = appSecret;
+		this.accessToken = accessToken;
 		this.applicationNamespace = applicationNamespace;
 		this.appId = appId;
 		initialize();
+
+		if (appSecret != null) {
+			setAppSecretInterceptor(getRestTemplate());
+		}
 	}
 	
 	@Override
@@ -141,9 +157,9 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Faceb
 	}
 	
 	/**
-	 * Set the Graph API version (e.g., "2.8"). If set to null, the version will be left out of the request URLs to the
+	 * Set the Graph API version (e.g., "2.10"). If set to null, the version will be left out of the request URLs to the
 	 * Graph API.
-	 * @param apiVersion the API version. Default is "2.8".
+	 * @param apiVersion the API version. Default is "2.10".
 	 */
 	public void setApiVersion(String apiVersion) {
 		this.apiVersion = apiVersion;
@@ -415,6 +431,12 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Faceb
 		restTemplate.setErrorHandler(new FacebookErrorHandler());
 	}
 
+	private void setAppSecretInterceptor(RestTemplate restTemplate) {
+		List<ClientHttpRequestInterceptor> interceptors = restTemplate.getInterceptors();
+		interceptors.add(new FacebookAppSecretProofInterceptor(accessToken, appSecret));
+		restTemplate.setInterceptors(interceptors);
+	}
+
 	@Override
 	protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
 		MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
@@ -453,7 +475,7 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Faceb
 	private <T> List<T> deserializeDataList(JsonNode jsonNode, final Class<T> elementType) {
 		try {
 			CollectionType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, elementType);
-			return (List<T>) objectMapper.reader(listType).readValue(jsonNode.toString()); // TODO: EXTREMELY HACKY--TEMPORARY UNTIL I FIGURE OUT HOW JACKSON 2 DOES THIS
+			return (List<T>) objectMapper.readerFor(listType).readValue(jsonNode.toString());
 		} catch (IOException e) {
 			throw new UncategorizedApiException("facebook", "Error deserializing data from Facebook: " + e.getMessage(), e);
 		}
@@ -469,5 +491,5 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements  Faceb
 		}
 		return builder.toString();
 	}
-	
+
 }
