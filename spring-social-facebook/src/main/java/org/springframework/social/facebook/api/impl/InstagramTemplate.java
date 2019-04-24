@@ -71,12 +71,37 @@ class InstagramTemplate implements InstagramOperations {
 
     public PagedList<InstagramComment> getReplies(String commentId, PagingParameters pagedListParameters) {
         MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
-        params.set("fields", StringUtils.arrayToCommaDelimitedString(BASIC_COMMENT_FIELDS));
+        params.set("fields", StringUtils.arrayToCommaDelimitedString(BASIC_REPLY_FIELDS));
         return graphApi.fetchConnections(commentId, "replies", InstagramComment.class, params);
     }
 
     public InstagramComment getComment(String commentId) {
         return graphApi.fetchObject(commentId, InstagramComment.class, BASIC_COMMENT_FIELDS);
+    }
+
+    public InstagramComment getReply(String commentId) {
+        return graphApi.fetchObject(commentId, InstagramComment.class, BASIC_REPLY_FIELDS);
+    }
+
+    @Override
+    public InstagramMedia getMentionedMedia(String userId, String mediaId) {
+        return graphApi.fetchObject(userId, MentionedMedia.class, "mentioned_media.media_id(" + mediaId +"){" + StringUtils.arrayToCommaDelimitedString(SHADOW_MEDIA_FIELDS) + "}").getMentionedMedia();
+    }
+
+    @Override
+    public PagedList<InstagramComment> getMentionedMediaComments(String userId, String mediaId, PagingParameters pagedListParameters) {
+        String pager = ".limit(" + pagedListParameters.getLimit() + ")";
+        if (!StringUtils.isEmpty(pagedListParameters.getAfter())) {
+            pager += ".after(" + pagedListParameters.getAfter() + ")";
+        } else if (!StringUtils.isEmpty(pagedListParameters.getBefore())) {
+            pager += ".before(" + pagedListParameters.getBefore() + ")";
+        }
+        return (PagedList<InstagramComment>) graphApi.fetchObject(userId, MentionedMedia.class, "mentioned_media.media_id(" + mediaId + "){comments" + pager + "{" + StringUtils.arrayToCommaDelimitedString(SHADOW_COMMENT_FIELDS) + "}}").getMentionedMedia().getComments();
+    }
+
+    @Override
+    public InstagramComment getMentionedComment(String userId, String commentId) {
+        return graphApi.fetchObject(userId, MentionedComment.class, "mentioned_comment.comment_id(" + commentId +"){" + StringUtils.arrayToCommaDelimitedString(SHADOW_COMMENT_FIELDS) + "}").getMentionedComment();
     }
 
     public PagedList<InstagramMedia> getCarouselChildren(String mediaId) {

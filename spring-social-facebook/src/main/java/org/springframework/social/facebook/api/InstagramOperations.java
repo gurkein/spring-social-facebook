@@ -122,6 +122,48 @@ public interface InstagramOperations {
     InstagramComment getComment(String commentId);
 
     /**
+     * Retrieves a single reply.
+     *
+     * @param commentId the Comment ID.
+     * @return the requested {@link InstagramComment}
+     * @throws ApiException if there is an error while communicating with Facebook.
+     */
+    InstagramComment getReply(String commentId);
+
+    /**
+     * Retrieves a mentioned media.
+     *
+     * @param userId mentioned user ID.
+     * @param mediaId the media ID.
+     * @return the requested {@link InstagramMedia}
+     * @throws ApiException if there is an error while communicating with Facebook.
+     */
+    InstagramMedia getMentionedMedia(String userId, String mediaId);
+
+    /**
+     * Retrieves comments for a given media.
+     * Requires "instagram_basic, instagram_manage_comments" permission to read comments.
+     *
+     * @param userId mentioned user ID.
+     * @param mediaId the media ID.
+     * @param pagedListParameters the parameters defining the bounds of the list to return.
+     * @return a list of {@link InstagramComment}s for the specified user.
+     * @throws ApiException                  if there is an error while communicating with Facebook.
+     * @throws MissingAuthorizationException if FacebookTemplate was not created with an access token.
+     */
+    PagedList<InstagramComment> getMentionedMediaComments(String userId, String mediaId, PagingParameters pagedListParameters);
+
+    /**
+     * Retrieves a mentioned comment.
+     *
+     * @param userId mentioned user ID.
+     * @param commentId the Comment ID.
+     * @return the requested {@link InstagramComment}
+     * @throws ApiException if there is an error while communicating with Facebook.
+     */
+    InstagramComment getMentionedComment(String userId, String commentId);
+
+    /**
      * Retrieves children entries for a given album carousel media.
      * Returns children media.
      * Requires "instagram_basic" permission to read stories.
@@ -200,7 +242,7 @@ public interface InstagramOperations {
     };
 
     static final String[] SHADOW_MEDIA_FIELDS = {
-            "caption", "comments_count", "id", "like_count", "media_type", "media_url", "timestamp", "username", "children{id,media_url,media_type}"
+            "caption", "comments_count", "id", "like_count", "media_type", "media_url", "timestamp", "username", "permalink", "children{id,media_url,media_type}"
     };
 
     static final String[] BASIC_STORY_FIELDS = {
@@ -212,7 +254,15 @@ public interface InstagramOperations {
     };
 
     static final String[] BASIC_COMMENT_FIELDS = {
-            "hidden", "id", "media{id,ig_id,owner{id,username}}", "text", "timestamp", "user{id,username}", "like_count", "username"
+            "hidden", "id", "media{id,ig_id,owner{id,ig_id,username}}", "text", "timestamp", "user{id,username}", "like_count", "username", "replies.limit(1)"
+    };
+
+    static final String[] BASIC_REPLY_FIELDS = {
+            "hidden", "id", "media{id,ig_id,owner{id,ig_id,username}}", "text", "timestamp", "user{id,username}", "like_count", "username"
+    };
+
+    static final String[] SHADOW_COMMENT_FIELDS = {
+            "id", "media{" + StringUtils.arrayToCommaDelimitedString(SHADOW_MEDIA_FIELDS) + "}", "text", "timestamp", "like_count", "username"
     };
 
     static final String[] ALL_COMMENT_FIELDS = {

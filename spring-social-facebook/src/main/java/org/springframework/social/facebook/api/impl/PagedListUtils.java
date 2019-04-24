@@ -15,16 +15,56 @@
  */
 package org.springframework.social.facebook.api.impl;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import org.springframework.social.UncategorizedApiException;
+import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.PagingParameters;
+import org.springframework.social.facebook.api.impl.json.FacebookModule;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class PagedListUtils {
+
+	public static <T> PagedList<T> pagify(Class<T> type, JsonNode jsonNode) {
+		List<T> data = deserializeDataList(jsonNode.get("data"), type);
+		if (!jsonNode.has("paging")) {
+			return new PagedList<T>(data, null, null);
+		}
+
+		JsonNode pagingNode = jsonNode.get("paging");
+		PagingParameters previousPage = getPagedListParameters(pagingNode, "previous");
+		PagingParameters nextPage = getPagedListParameters(pagingNode, "next");
+		if (nextPage == null && previousPage == null && pagingNode != null && pagingNode.has("cursors")) {
+			JsonNode cursorNode = pagingNode.get("cursors");
+			if (cursorNode.has("after")) {
+				nextPage = new PagingParameters(null, null, null, null,
+						cursorNode.get("after").asText(), null);;
+			}
+			if (cursorNode.has("before")) {
+				previousPage = new PagingParameters(null, null, null, null,
+						null, cursorNode.get("before").asText());;
+			}
+		}
+
+		Integer totalCount = null;
+		if (jsonNode.has("summary")) {
+			JsonNode summaryNode = jsonNode.get("summary");
+			if (summaryNode.has("total_count")) {
+				totalCount = summaryNode.get("total_count").intValue();
+			}
+		}
+
+		return new PagedList<T>(data, previousPage, nextPage, totalCount);
+	}
 
 	public static PagingParameters getPagedListParameters(JsonNode pagingNode, String pageKey) {
 		if (pagingNode == null || pagingNode.get(pageKey) == null) {
@@ -91,6 +131,18 @@ public class PagedListUtils {
 			return url.substring(startPos + paramName.length() + 1, ampPos);
 		}
 		return url.substring(startPos + paramName.length() + 1);
+	}
+
+	@SuppressWarnings("unchecked")
+	private static <T> List<T> deserializeDataList(JsonNode jsonNode, final Class<T> elementType) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new FacebookModule());
+		try {
+			CollectionType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, elementType);
+			return (List<T>) mapper.readerFor(listType).readValue(jsonNode.toString());
+		} catch (IOException e) {
+			throw new UncategorizedApiException("facebook", "Error deserializing data from Facebook: " + e.getMessage(), e);
+		}
 	}
 
 }

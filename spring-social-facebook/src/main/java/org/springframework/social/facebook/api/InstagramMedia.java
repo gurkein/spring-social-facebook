@@ -37,7 +37,7 @@ public class InstagramMedia extends FacebookObject {
 
     private List<InstagramMedia> children;
 
-    private List<Comment> comments;
+    private List<InstagramComment> comments;
 
     public String getId() {
         return id;
@@ -107,11 +107,11 @@ public class InstagramMedia extends FacebookObject {
         }
     }
 
-    public List<Comment> getComments() {
+    public List<InstagramComment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<InstagramComment> comments) {
         this.comments = comments;
     }
 

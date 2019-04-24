@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
-import org.springframework.social.facebook.api.Comment;
+import org.springframework.social.facebook.api.InstagramComment;
 import org.springframework.social.facebook.api.InstagramMedia;
 import org.springframework.social.facebook.api.InstagramUser;
 
@@ -74,7 +74,8 @@ abstract class InstagramMediaMixin extends FacebookObjectMixin {
     List<InstagramMedia> children;
 
     @JsonProperty("comments")
-    List<Comment> comments;
+    @JsonDeserialize(using = InstagramCommentListDeserializer.class)
+    List<InstagramComment> comments;
 
     @JsonProperty("is_comment_enabled")
     boolean isCommentEnabled;
