@@ -23,6 +23,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptorModule;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.PagingParameters;
@@ -137,6 +138,7 @@ public class PagedListUtils {
 	private static <T> List<T> deserializeDataList(JsonNode jsonNode, final Class<T> elementType) {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new FacebookModule());
+        mapper.registerModule(new JsonInterceptorModule());
 		try {
 			CollectionType listType = TypeFactory.defaultInstance().constructCollectionType(List.class, elementType);
 			return (List<T>) mapper.readerFor(listType).readValue(jsonNode.toString());
