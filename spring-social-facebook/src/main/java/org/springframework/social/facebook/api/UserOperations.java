@@ -125,7 +125,7 @@ public interface UserOperations {
 	PagedList<Reference> search(String query);
 
     static final String[] PROFILE_FIELDS = {
-            "id", "address", "birthday", "context", "email", "favorite_athletes", "favorite_teams", "first_name", "hometown",
+            "id", "address", "birthday", "email", "favorite_athletes", "favorite_teams", "first_name", "hometown",
             "inspirational_people", "installed", "install_type", "languages", "last_name", "location", "meeting_for",
             "middle_name", "name", "name_format", "quotes", "payment_pricepoints", "security_settings",
             "significant_other", "sports", "test_group", "video_upload_limits", "viewer_can_send_gift",
