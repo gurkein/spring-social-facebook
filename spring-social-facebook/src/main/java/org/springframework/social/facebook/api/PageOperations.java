@@ -222,7 +222,7 @@ public interface PageOperations {
     };
 
     static final String[] ALL_PAGE_FIELDS = {
-            "id", "about", "access_token", "business", "can_checkin", "can_post", "category", "category_list", "checkins",
+            "id", "about", "access_token", /*"business", */"can_checkin", "can_post", "category", "category_list", "checkins",
             "country_page_likes", "current_location", "description", "description_html", "emails", "engagement",
             "fan_count", "general_info", "global_brand_page_name", "global_brand_root_id", "has_added_app",
             "instagram_business_account", "link", "name", "new_like_count", "parent_page", "phone",
