@@ -259,7 +259,7 @@ public interface InstagramOperations {
 
     // owner.ig_id is not allowed :(
     static final String[] BASIC_REPLY_FIELDS = {
-            "hidden", "id", "media{id,ig_id,owner{id,username}}", "text", "timestamp", "user{id,username}", "like_count", "username"
+            "hidden", "id", "media{id,ig_id,owner{id,ig_id,username}}", "text", "timestamp", "user{id,username}", "like_count", "username"
     };
 
     static final String[] SHADOW_COMMENT_FIELDS = {
