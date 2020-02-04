@@ -59,6 +59,10 @@ class InstagramTemplate implements InstagramOperations {
         return graphApi.fetchObject(mediaId, InstagramMedia.class, BASIC_MEDIA_FIELDS);
     }
 
+    public InstagramMedia getStory(String mediaId) {
+        return graphApi.fetchObject(mediaId, InstagramMedia.class, BASIC_STORY_FIELDS);
+    }
+
     public PagedList<InstagramComment> getComments(String mediaId) {
         return graphApi.fetchConnections(mediaId, "comments", InstagramComment.class, BASIC_COMMENT_FIELDS);
     }

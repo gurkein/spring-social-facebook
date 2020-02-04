@@ -77,6 +77,15 @@ public interface InstagramOperations {
     InstagramMedia getSingleMedia(String mediaId);
 
     /**
+     * Retrieves a story.
+     *
+     * @param mediaId the media ID.
+     * @return the requested {@link InstagramMedia}
+     * @throws ApiException if there is an error while communicating with Facebook.
+     */
+    InstagramMedia getStory(String mediaId);
+
+    /**
      * Retrieves recent comments for a given media.
      * Returns up to the most recent 25 comments.
      * Requires "instagram_basic, instagram_manage_comments" permission to read comments.
