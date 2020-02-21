@@ -128,6 +128,12 @@ class PageTemplate implements PageOperations {
 		return graphApi.fetchConnections(pageId, "conversations", Conversation.class, params, ALL_CONVERSATION_FIELDS);
 	}
 
+	public PagedList<Conversation> getConversations(String pageId, String userId, PagingParameters pagedListParameters) {
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("user_id", userId);
+		return graphApi.fetchConnections(pageId, "conversations", Conversation.class, params, ALL_CONVERSATION_FIELDS);
+	}
+
 	public PagedList<Message> getConversationMessages(String conversationId, PagingParameters pagedListParameters) {
 		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
 		return graphApi.fetchConnections(conversationId, "messages", Message.class, params, ALL_MESSAGE_FIELDS);

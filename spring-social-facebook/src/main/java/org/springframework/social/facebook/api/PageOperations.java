@@ -179,6 +179,14 @@ public interface PageOperations {
 	 */
 	PagedList<Conversation> getConversations(String pageId, PagingParameters pagedListParameters);
 
+	/**
+	 *
+	 * @param pageId
+	 * @param userId
+	 * @param pagedListParameters
+	 * @return
+	 */
+	PagedList<Conversation> getConversations(String pageId, String userId, PagingParameters pagedListParameters);
 
 	/**
 	 *
