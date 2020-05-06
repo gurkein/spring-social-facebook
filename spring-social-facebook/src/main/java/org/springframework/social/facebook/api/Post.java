@@ -194,6 +194,7 @@ public class Post extends FacebookObject {
 		return updatedTime;
 	}
 
+	@Deprecated
 	public List<Reference> getWithTags() {
 		return withTags;
 	}
