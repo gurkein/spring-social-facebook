@@ -5,6 +5,7 @@
         "id":"1533260333"
     },
     "message":"Howdy!",
+    "can_hide": true,
     "can_remove": true,
     "can_comment": true,
     "created_time":"2011-01-17T16:02:09+0000",

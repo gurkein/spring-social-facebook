@@ -32,7 +32,7 @@ public class CommentTemplateTest extends AbstractFacebookApiTest {
 	
 	@Test
 	public void getComments() throws Exception {
-		mockServer.expect(requestTo(fbUrl("123456/comments?offset=0&limit=25&fields=id%2Cattachment%2Ccan_comment%2Ccan_remove%2Ccomment_count%2Ccreated_time%2Cfrom%7Bid%2Cname%2Cpicture%7D%2Clike_count%2Cmessage%2Cparent%2Cuser_likes%2Cis_hidden%2Cmessage_tags")))
+		mockServer.expect(requestTo(fbUrl("123456/comments?offset=0&limit=25&fields=id%2Cattachment%2Ccan_comment%2Ccan_hide%2Ccan_remove%2Ccomment_count%2Ccreated_time%2Cfrom%7Bid%2Cname%2Cpicture%7D%2Clike_count%2Cmessage%2Cparent%2Cuser_likes%2Cis_hidden%2Cmessage_tags")))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("comments"), MediaType.APPLICATION_JSON));
@@ -51,11 +51,11 @@ public class CommentTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getComments_withOffsetAndLimit() {
-		mockServer.expect(requestTo(fbUrl("123456/comments?offset=75&limit=100&fields=id%2Cattachment%2Ccan_comment%2Ccan_remove%2Ccomment_count%2Ccreated_time%2Cfrom%7Bid%2Cname%2Cpicture%7D%2Clike_count%2Cmessage%2Cparent%2Cuser_likes%2Cis_hidden%2Cmessage_tags")))
+		mockServer.expect(requestTo(fbUrl("123456/comments?offset=75&limit=100&fields=id%2Cattachment%2Ccan_comment%2Ccan_hide%2Ccan_remove%2Ccomment_count%2Ccreated_time%2Cfrom%7Bid%2Cname%2Cpicture%7D%2Clike_count%2Cmessage%2Cparent%2Cuser_likes%2Cis_hidden%2Cmessage_tags")))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("comments"), MediaType.APPLICATION_JSON));
-		
+
 		List<Comment> comments = facebook.commentOperations().getComments("123456", new PagingParameters(100, 75, null, null));
 		assertEquals(2, comments.size());
 		Comment comment1 = comments.get(0);
@@ -82,7 +82,7 @@ public class CommentTemplateTest extends AbstractFacebookApiTest {
 	
 	@Test
 	public void getComment() {
-		mockServer.expect(requestTo(fbUrl("1533260333_122829644452184_587062?fields=id%2Cattachment%2Ccan_comment%2Ccan_remove%2Ccomment_count%2Ccreated_time%2Cfrom%7Bid%2Cname%2Cpicture%7D%2Clike_count%2Cmessage%2Cparent%2Cuser_likes%2Cis_hidden%2Cmessage_tags")))
+		mockServer.expect(requestTo(fbUrl("1533260333_122829644452184_587062?fields=id%2Cattachment%2Ccan_comment%2Ccan_hide%2Ccan_remove%2Ccomment_count%2Ccreated_time%2Cfrom%7Bid%2Cname%2Cpicture%7D%2Clike_count%2Cmessage%2Cparent%2Cuser_likes%2Cis_hidden%2Cmessage_tags")))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("comment"), MediaType.APPLICATION_JSON));
