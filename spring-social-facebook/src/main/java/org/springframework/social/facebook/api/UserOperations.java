@@ -127,8 +127,8 @@ public interface UserOperations {
     static final String[] PROFILE_FIELDS = {
             "id", "address", "email", "first_name",
             "installed", "install_type", "last_name", "meeting_for",
-            "middle_name", "name", "name_format", "payment_pricepoints", "security_settings",
-            "significant_other", "test_group", "video_upload_limits", "viewer_can_send_gift"
+            "middle_name", "name", "name_format", "payment_pricepoints",
+            "significant_other", "video_upload_limits"
     };
 
 	static final String[] PROFILE_FIELDS_DEPRECATED = {
@@ -136,7 +136,9 @@ public interface UserOperations {
 			"cover", "currency", "devices", "is_verified", "locale", "timezone", "updated_time", "verified", "third_party_id",
 			// returns no data as of April 4, 2018
 			"about", "education", "interested_in", "political", "relationship_status", "religion",
-			"website", "work"
+			"website", "work",
+			// deprecated in all versions on Nov, 2020
+			"security_settings", "test_group", "viewer_can_send_gift"
 	};
 
 
