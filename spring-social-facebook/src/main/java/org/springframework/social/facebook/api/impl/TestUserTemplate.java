@@ -76,7 +76,7 @@ public class TestUserTemplate extends AbstractFacebookOperations implements Test
 		TestUserList users = restTemplate.getForObject(graphApi.getBaseGraphApiUrl() + "{appId}/accounts/test-users", TestUserList.class, appId);
 		return Optional.ofNullable(users).map(TestUserList::getTestUsers).orElse(Collections.emptyList());
 	}
-	
+
 	public void sendConfirmFriends(TestUser testUser1, TestUser testUser2) {
 		RestOperations userRest = new FacebookTemplate(testUser1.getAccessToken()).restOperations();
 		

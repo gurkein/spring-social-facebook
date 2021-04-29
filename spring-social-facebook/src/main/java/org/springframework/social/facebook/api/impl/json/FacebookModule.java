@@ -127,6 +127,8 @@ public class FacebookModule extends SimpleModule {
 		context.setMixInAnnotations(InstagramBusinessAccount.class, InstagramBusinessAccountMixin.class);
 		context.setMixInAnnotations(InstagramMedia.class, InstagramMediaMixin.class);
 		context.setMixInAnnotations(InstagramComment.class, InstagramCommentMixin.class);
+		context.setMixInAnnotations(MentionedMedia.class, MentionedMediaMixin.class);
+		context.setMixInAnnotations(MentionedComment.class, MentionedCommentMixin.class);
 
 	}
 }

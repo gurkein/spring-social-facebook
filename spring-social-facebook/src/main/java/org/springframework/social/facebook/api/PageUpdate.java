@@ -27,7 +27,7 @@ public class PageUpdate {
 	private final String pageId;
 	
 	private String about;
-	
+
 	private String cover;
 	
 	private String name;
@@ -60,7 +60,7 @@ public class PageUpdate {
 		this.about = about;
 		return this;
 	}
-	
+
 	public PageUpdate cover(String cover, Integer offsetX, Integer offsetY, Float zoomScaleX, Float zoomScaleY, Float focusX, Float focusY) {
 		this.cover = cover;
 		this.offsetX = offsetX;

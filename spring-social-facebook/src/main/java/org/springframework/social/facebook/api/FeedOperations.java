@@ -417,18 +417,20 @@ public interface FeedOperations {
      */
     Post getCheckin(String checkinId);
 
-    static final String[] ALL_POST_FIELDS = {
-            "id", "actions", "admin_creator", "application", "caption", "created_time", "description",
-            "from{id,name,picture}", "icon", "is_hidden", "is_published", "link", "message", "message_tags", "name",
-            "object_id", "picture", "place", "privacy", "properties", "source", "status_type", "story", "to", "type",
-            "updated_time", "with_tags", "shares", "attachments", "likes.limit(0).summary(1)",
-            "comments.order(reverse_chronological).filter(stream).limit(0).summary(1)", "reactions.limit(0).summary(1)",
-            "reactions.type(LIKE).summary(total_count).limit(0).as(reactions_like)",
-            "reactions.type(LOVE).summary(total_count).limit(0).as(reactions_love)",
-            "reactions.type(WOW).summary(total_count).limit(0).as(reactions_wow)",
-            "reactions.type(HAHA).summary(total_count).limit(0).as(reactions_haha)",
-            "reactions.type(THANKFUL).summary(total_count).limit(0).as(reactions_thankful)",
-            "reactions.type(SAD).summary(total_count).limit(0).as(reactions_sad)",
-            "reactions.type(ANGRY).summary(total_count).limit(0).as(reactions_angry)"};
+	static final String[] ALL_POST_FIELDS = {
+			"id", "actions", "admin_creator", "application", "caption", "created_time", "description", "from{id,name,picture}", "icon",
+			"is_hidden", "is_published", "link", "message", "message_tags", "name", "object_id", "picture", "place",
+			"privacy", "properties", "source", "status_type", "story", "to", "type", "updated_time", "shares",
+			"attachments", "likes.limit(0).summary(1)", "comments.order(reverse_chronological).filter(stream).limit(0).summary(1)", "reactions.limit(0).summary(1)"
+	};
+
+	static final String[] REACTION_FIELDS = {
+			"reactions.type(LIKE).summary(total_count).limit(0).as(reactions_like)",
+			"reactions.type(LOVE).summary(total_count).limit(0).as(reactions_love)",
+			"reactions.type(WOW).summary(total_count).limit(0).as(reactions_wow)",
+			"reactions.type(HAHA).summary(total_count).limit(0).as(reactions_haha)",
+			"reactions.type(THANKFUL).summary(total_count).limit(0).as(reactions_thankful)",
+			"reactions.type(SAD).summary(total_count).limit(0).as(reactions_sad)",
+			"reactions.type(ANGRY).summary(total_count).limit(0).as(reactions_angry)"};
 
 }

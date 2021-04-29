@@ -46,7 +46,7 @@ public class PagePostData {
 	private String picture;
 
 	private Targeting targeting;
-	
+
 	/**
 	 * Creates a new {@link PagePostData}.
 	 * @param pageId The ID of the owner of the post.
@@ -123,9 +123,8 @@ public class PagePostData {
 		if (caption != null) { parameters.add("caption", caption); }
 		if (description != null) { parameters.add("description", description); }
 		if (picture != null) { parameters.add("picture", picture); }
-
-		if (targeting != null) {parameters.add("targeting", targeting.toString());}
-		if (placeId != null) { 
+		if (targeting != null) { parameters.add("targeting", targeting.toString()); }
+		if (placeId != null) {
 			parameters.add("place", placeId);
 			// tags are only allowed if a place is given
 			if (tags != null) { parameters.add("tags", StringUtils.arrayToCommaDelimitedString(tags)); }

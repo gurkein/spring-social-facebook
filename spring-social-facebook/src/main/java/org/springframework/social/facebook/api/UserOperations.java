@@ -137,20 +137,30 @@ public interface UserOperations {
     PagedList<Reference> search(String query);
 
     static final String[] PROFILE_FIELDS = {
-            "id", "address", "birthday", "context", "email", "favorite_athletes", "favorite_teams", "first_name", "hometown",
-            "inspirational_people", "installed", "install_type", "languages", "last_name", "location", "meeting_for",
-            "middle_name", "name", "name_format", "quotes", "payment_pricepoints", "security_settings",
-            "significant_other", "sports", "test_group", "video_upload_limits", "viewer_can_send_gift",
-            // deprecated
-            "cover", "currency", "devices", "is_verified", "locale", "timezone", "updated_time", "verified",
-            // returns no data as of April 4, 2018
-            "about", "education", "interested_in", "political", "relationship_status", "religion", "third_party_id",
-            "website", "work"
+            "id", "address", "email", "first_name",
+            "installed", "install_type", "last_name", "meeting_for",
+            "middle_name", "name", "name_format", "payment_pricepoints",
+            "significant_other", "video_upload_limits"
     };
 
-    static final String[] PROFILE_FIELDS_WITH_PERMISSION = {
+	static final String[] PROFILE_FIELDS_DEPRECATED = {
+			// deprecated
+			"cover", "currency", "devices", "is_verified", "locale", "timezone", "updated_time", "verified", "third_party_id",
+			// returns no data as of April 4, 2018
+			"about", "education", "interested_in", "political", "relationship_status", "religion",
+			"website", "work",
+			// deprecated in all versions on Nov, 2020
+			"security_settings", "test_group", "viewer_can_send_gift"
+	};
+
+
+	static final String[] PROFILE_FIELDS_WITH_PERMISSION = {
             // requires extra permission
-            "age_range", "gender", "link"
+			"birthday", // user_birthday
+			"favorite_athletes", "favorite_teams", "inspirational_people", "languages", "quotes", "sports", // user_likes
+			"hometown", // user_hometown
+			"location", // user_location
+			"age_range", "gender", "link"
     };
 
 }

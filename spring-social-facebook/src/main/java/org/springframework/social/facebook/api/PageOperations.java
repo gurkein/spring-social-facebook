@@ -192,17 +192,42 @@ public interface PageOperations {
      */
     PagedList<Conversation> getConversations(String pageId, PagingParameters pagedListParameters);
 
-    /**
-     * @param conversationId
-     * @return
-     */
-    PagedList<Message> getConversationMessages(String conversationId, PagingParameters pagedListParameters);
+	/**
+	 *
+	 * @param pageId
+	 * @param userId
+	 * @param pagedListParameters
+	 * @return
+	 */
+	PagedList<Conversation> getConversations(String pageId, String userId, PagingParameters pagedListParameters);
 
-    /**
-     * @param conversationId
-     * @return
-     */
-    String postConversationMessage(String conversationId, String message);
+	/**
+	 *
+	 * @param conversationId
+	 * @return
+	 */
+	Conversation getConversation(String conversationId);
+
+	/**
+	 *
+	 * @param conversationId
+	 * @return
+	 */
+	PagedList<Message> getConversationMessages(String conversationId, PagingParameters pagedListParameters);
+
+	/**
+	 *
+	 * @param messageId
+	 * @return
+	 */
+	Message getMessage(String messageId);
+
+	/**
+	 *
+	 * @param conversationId
+	 * @return
+	 */
+	String postConversationMessage(String conversationId, String message);
 
     /**
      * Returns a {@link Facebook} instance that will act on behalf of the given page.
@@ -219,7 +244,7 @@ public interface PageOperations {
     };
 
     static final String[] ALL_PAGE_FIELDS = {
-            "id", "about", "access_token", "business", "can_checkin", "can_post", "category", "category_list", "checkins",
+            "id", "about", "access_token", /*"business", */"can_checkin", "can_post", "category", "category_list", "checkins",
             "country_page_likes", "current_location", "description", "description_html", "emails", "engagement",
             "fan_count", "general_info", "global_brand_page_name", "global_brand_root_id", "has_added_app",
             "instagram_business_account", "link", "name", "new_like_count", "parent_page", "phone",
@@ -231,9 +256,19 @@ public interface PageOperations {
             "food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
             "mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",
             "personal_interests", "pharma_safety_info", "place_type", "plot_outline", "press_contact", "price_range",
-            "produced_by", "products", "public_transit", "publisher_space", "record_label", "release_date",
+            "produced_by", "products", "public_transit", "record_label", "release_date",
             "restaurant_services", "restaurant_specialties", "schedule", "screenplay_by", "season", "starring",
             "store_number", "studio", "written_by", "offer_eligible",
             "app_id", "hours", "is_community_page", "is_permanently_closed", "is_published", "is_unclaimed"
     };
+
+    static final String[] ALL_CONVERSATION_FIELDS = {
+			"id", "updated_time", "snippet", "message_count", "unread_count", "participants",
+			"senders", "can_reply", "is_subscribed", "link"
+	};
+
+    static final String[] ALL_MESSAGE_FIELDS = {
+			"id", "created_time", "from", "message", "to", "sticker", "tags",
+			"attachments{id,image_data,mime_type,name,size,video_data,file_url}", "shares{id,link,description,name}"
+	};
 }

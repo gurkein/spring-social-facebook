@@ -48,7 +48,7 @@ public class Page extends FacebookObject {
 	private String bandMembers;
 	
 	private Page bestPage;
-	
+
 	private String birthday;
 	
 	private String bookingAgent;
@@ -311,7 +311,6 @@ public class Page extends FacebookObject {
 	public int getFanCount() {
 		return fanCount;
 	}
-
 	
 	public int getTalkingAboutCount() {
 		return talkingAboutCount;

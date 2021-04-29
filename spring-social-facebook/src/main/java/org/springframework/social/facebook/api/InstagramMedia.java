@@ -19,6 +19,8 @@ public class InstagramMedia extends FacebookObject {
 
     private InstagramUser owner;
 
+    private String username;
+
     private String permalink;
 
     private String shortcode;
@@ -35,7 +37,7 @@ public class InstagramMedia extends FacebookObject {
 
     private List<InstagramMedia> children;
 
-    private List<Comment> comments;
+    private List<InstagramComment> comments;
 
     public String getId() {
         return id;
@@ -59,6 +61,10 @@ public class InstagramMedia extends FacebookObject {
 
     public InstagramUser getOwner() {
         return owner;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getPermalink() {
@@ -101,11 +107,11 @@ public class InstagramMedia extends FacebookObject {
         }
     }
 
-    public List<Comment> getComments() {
+    public List<InstagramComment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<InstagramComment> comments) {
         this.comments = comments;
     }
 

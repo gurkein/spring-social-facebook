@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.facebook.api;
+package org.springframework.social.facebook.api.impl.json;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
+import org.springframework.social.facebook.api.InstagramMedia;
 
-public interface TestUserOperations {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInterceptors(beforeDeserialization = RawJsonDeserializationInterceptor.class)
+abstract class MentionedMediaMixin extends FacebookObjectMixin {
 
-	TestUser createTestUser(boolean installed, String permissions);
-	
-	TestUser createTestUser(boolean installed, String permissions, String name);
+    @JsonProperty("id")
+    String id;
 
-	List<TestUser> getTestUsers();
-
-	void sendConfirmFriends(TestUser user1, TestUser user2);
-	
-	void deleteTestUser(String testUserId);
+    @JsonProperty("mentioned_media")
+    InstagramMedia mentionedMedia;
 
 }
+

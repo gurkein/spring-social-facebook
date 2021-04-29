@@ -21,6 +21,7 @@
             "message":"The world says hello back",
             "created_time":"2011-01-18T05:01:07+0000",
             "can_comment": true,
+            "can_hide": true,
             "can_remove": true,
             "user_likes": true,
             "comment_count": 40,

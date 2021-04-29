@@ -177,6 +177,7 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 
 	@Test 
 	public void getFeedEntry() {
+//		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR + "%2C" + REACTION_FIELDS_STR)))
 		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR)))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
@@ -191,6 +192,7 @@ public class FeedTemplateTest extends AbstractFacebookApiTest {
 
 	@Test 
 	public void getFeedEntry_noLikes() {
+//		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR + "%2C" + REACTION_FIELDS_STR)))
 		mockServer.expect(requestTo(fbUrl("100001387295207_123939024341978?fields=" + ALL_POST_FIELDS_STR)))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))

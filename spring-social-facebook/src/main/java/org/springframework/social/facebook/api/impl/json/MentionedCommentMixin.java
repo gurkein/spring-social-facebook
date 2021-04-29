@@ -17,52 +17,18 @@ package org.springframework.social.facebook.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
-import org.springframework.social.facebook.api.Reference;
+import org.springframework.social.facebook.api.InstagramComment;
 
-import java.util.Date;
-import java.util.List;
-
-/**
- * Annotated mixin to add Jackson annotations to Conversation.
- *
- * @author Gurkan Vural
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInterceptors(beforeDeserialization = RawJsonDeserializationInterceptor.class)
-abstract class ConversationMixin extends FacebookObjectMixin {
+abstract class MentionedCommentMixin extends FacebookObjectMixin {
 
-    @JsonProperty
+    @JsonProperty("id")
     String id;
 
-    @JsonProperty
-    String snippet;
-
-    @JsonProperty("updated_time")
-    Date updatedTime;
-
-    @JsonProperty("message_count")
-    int messageCount;
-
-    @JsonProperty("unread_count")
-    int unreadCount;
-
-    @JsonProperty
-    @JsonDeserialize(using = ReferenceListDeserializer.class)
-    List<Reference> participants;
-
-    @JsonProperty
-    @JsonDeserialize(using = ReferenceListDeserializer.class)
-    List<Reference> senders;
-
-    @JsonProperty("can_reply")
-    boolean canReply;
-
-    @JsonProperty("is_subscribed")
-    boolean isSubscribed;
-
-    @JsonProperty
-    String link;
+    @JsonProperty("mentioned_comment")
+    InstagramComment mentionedComment;
 
 }
+

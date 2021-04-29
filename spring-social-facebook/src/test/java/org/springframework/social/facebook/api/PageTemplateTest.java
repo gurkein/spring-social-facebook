@@ -319,7 +319,7 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 	}
 
 	static final String[] ALL_PAGE_FIELDS = {
-			"id", "about", "access_token", "business", "can_checkin", "can_post", "category", "category_list", "checkins",
+			"id", "about", "access_token", /*"business", */"can_checkin", "can_post", "category", "category_list", "checkins",
 			"country_page_likes", "current_location", "description", "description_html", "emails", "engagement",
 			"fan_count", "general_info", "global_brand_page_name", "global_brand_root_id", "has_added_app",
 			"instagram_business_account", "link", "name", "new_like_count", "parent_page", "phone",
@@ -331,7 +331,7 @@ public class PageTemplateTest extends AbstractFacebookApiTest {
 			"food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
 			"mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",
 			"personal_interests", "pharma_safety_info", "place_type", "plot_outline", "press_contact", "price_range",
-			"produced_by", "products", "public_transit", "publisher_space", "record_label", "release_date",
+			"produced_by", "products", "public_transit", "record_label", "release_date",
 			"restaurant_services", "restaurant_specialties", "schedule", "screenplay_by", "season", "starring",
 			"store_number", "studio", "written_by", "offer_eligible",
 			"app_id", "hours", "is_community_page", "is_permanently_closed", "is_published", "is_unclaimed"
