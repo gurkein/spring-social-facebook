@@ -55,6 +55,12 @@ public class Comment extends FacebookObject {
 	private Comment parent;
 
 	private boolean userLikes;
+
+	private boolean canLike;
+
+	private boolean canReplyPrivately;
+
+	private Conversation privateReplyConversation;
 	
 	/**
 	 * @return the comment's Graph API object ID
@@ -172,4 +178,15 @@ public class Comment extends FacebookObject {
 		return messageTags != null ? messageTags : EMPTY_TAG_LIST;
 	}
 
+	public boolean isCanLike() {
+		return canLike;
+	}
+
+	public boolean isCanReplyPrivately() {
+		return canReplyPrivately;
+	}
+
+	public Conversation getPrivateReplyConversation() {
+		return privateReplyConversation;
+	}
 }

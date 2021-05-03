@@ -99,6 +99,8 @@ public class Post extends FacebookObject {
 
     private List<StoryAttachment> attachments;
 
+    private boolean canReplyPrivately;
+
     public String getId() {
         return id;
     }
@@ -275,6 +277,10 @@ public class Post extends FacebookObject {
 
     public List<StoryAttachment> getAttachments() {
         return attachments;
+    }
+
+    public boolean isCanReplyPrivately() {
+        return canReplyPrivately;
     }
 
     public static class AdminCreator {

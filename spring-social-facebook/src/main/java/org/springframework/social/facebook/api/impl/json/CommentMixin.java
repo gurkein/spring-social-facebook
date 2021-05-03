@@ -19,10 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
-import org.springframework.social.facebook.api.Comment;
-import org.springframework.social.facebook.api.MessageTag;
-import org.springframework.social.facebook.api.Reference;
-import org.springframework.social.facebook.api.StoryAttachment;
+import org.springframework.social.facebook.api.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -76,5 +73,14 @@ abstract class CommentMixin extends FacebookObjectMixin {
 
 	@JsonProperty("user_likes")
 	boolean userLikes;
+
+	@JsonProperty("can_like")
+	boolean canLike;
+
+	@JsonProperty("can_reply_privately")
+	boolean canReplyPrivately;
+
+	@JsonProperty("private_reply_conversation")
+	Conversation privateReplyConversation;
 
 }

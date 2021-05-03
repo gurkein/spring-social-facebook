@@ -141,6 +141,9 @@ abstract class PostMixin extends FacebookObjectMixin {
 	@JsonDeserialize(using = StoryAttachmentListDeserializer.class)
 	List<StoryAttachment> attachments;
 
+	@JsonProperty("can_reply_privately")
+	boolean canReplyPrivately;
+
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public abstract static class AdminCreatorMixin {
 		
