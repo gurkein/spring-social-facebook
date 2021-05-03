@@ -37,8 +37,12 @@ public class StoryAttachment {
 	private StoryAttachmentTarget target;
 	
 	private StoryAttachmentMedia media;
-	
-	
+
+	// album, animated_image_autoplay, checkin, cover_photo, event, link, multiple, music, note, offer, photo, profile_media, status, video, video_autoplay
+	private String mediaType;
+
+	private String unshimmedUrl;
+
 	/**
 	 * @return the attachment title
 	 */
@@ -87,22 +91,46 @@ public class StoryAttachment {
 	public StoryAttachmentMedia getMedia() {
 		return media;
 	}
-	
+
+	public String getMediaType() {
+		return mediaType;
+	}
+
+	public StoryAttachment setMediaType(String mediaType) {
+		this.mediaType = mediaType;
+		return this;
+	}
+
+	public String getUnshimmedUrl() {
+		return unshimmedUrl;
+	}
+
+	public StoryAttachment setUnshimmedUrl(String unshimmedUrl) {
+		this.unshimmedUrl = unshimmedUrl;
+		return this;
+	}
+
 	/**
 	 * Domain type representing the media of an attachment.
 	 * @author Craig Walls
 	 */
 	public static class StoryAttachmentMedia {
-		private final ImageSource image; 
+		private final ImageSource image;
+
+		private final String source;
 		
-		public StoryAttachmentMedia(ImageSource image) {
+		public StoryAttachmentMedia(ImageSource image, String source) {
 			this.image = image;
+			this.source = source;
 		}
-		
+
 		public ImageSource getImage() {
 			return image;
 		}
 
+		public String getSource() {
+			return source;
+		}
 	}
 	
 	/**

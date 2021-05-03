@@ -388,11 +388,16 @@ public interface FeedOperations {
 	 */
 	Post getCheckin(String checkinId);
 
+	static final String[] DEPRECATED_POST_FIELDS = {
+			"caption", "description", "link", "name", "object_id", "source", "type"
+	};
+
 	static final String[] ALL_POST_FIELDS = {
-			"id", "actions", "admin_creator", "application", "caption", "created_time", "description", "from{id,name,picture}", "icon",
-			"is_hidden", "is_published", "link", "message", "message_tags", "name", "object_id", "picture", "place",
-			"privacy", "properties", "source", "status_type", "story", "to", "type", "updated_time", "shares",
-			"attachments", "likes.limit(0).summary(1)", "comments.order(reverse_chronological).filter(stream).limit(0).summary(1)", "reactions.limit(0).summary(1)"
+			"id", "actions", "admin_creator", "application", "created_time", "from{id,name,picture}", "icon",
+			"is_hidden", "is_published", "message", "message_tags", "picture", "place",
+			"privacy", "properties", "status_type", "story", "to", "updated_time", "shares",
+			"attachments{description,title,type,url,unshimmed_url,media,target,media_type}",
+			"likes.limit(0).summary(1)", "comments.order(reverse_chronological).filter(stream).limit(0).summary(1)", "reactions.limit(0).summary(1)"
 	};
 
 	static final String[] REACTION_FIELDS = {

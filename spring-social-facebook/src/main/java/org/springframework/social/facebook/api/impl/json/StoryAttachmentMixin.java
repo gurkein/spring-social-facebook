@@ -47,12 +47,19 @@ abstract class StoryAttachmentMixin {
 	
 	@JsonProperty("media")
 	StoryAttachmentMedia media;
-	
+
+	@JsonProperty("media_type")
+	String mediaType;
+
+	@JsonProperty("unshimmed_url")
+	String unshimmedUrl;
+
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	static abstract class StoryAttachmentMediaMixin {
 		
 		StoryAttachmentMediaMixin(
-				@JsonProperty("image") ImageSource image) {}
+				@JsonProperty("image") ImageSource image,
+				@JsonProperty("source") String source) {}
 		
 	}
 	

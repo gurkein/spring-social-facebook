@@ -27,7 +27,7 @@ import org.springframework.web.client.RestOperations;
  */
 public interface Facebook extends GraphApi, ApiBinding {
 	
-	public static final String DEFAULT_API_VERSION = "3.2";
+	public static final String DEFAULT_API_VERSION = "10.0";
 
 	/**
 	 * API for working with achievements.

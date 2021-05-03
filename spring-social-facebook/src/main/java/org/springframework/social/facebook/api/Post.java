@@ -15,263 +15,335 @@
  */
 package org.springframework.social.facebook.api;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 
 
 /**
- * Model class representing an entry in a feed. 
+ * Model class representing an entry in a feed.
+ *
  * @author Craig Walls
  */
 public class Post extends FacebookObject {
-	
-	private String id;
-	
-	private List<Action> actions;
-	
-	private AdminCreator adminCreator;
 
-	private Reference application;
+    private String id;
 
-	private String caption;
+    private List<Action> actions;
 
-	private Date createdTime;
+    private AdminCreator adminCreator;
 
-	private String description;
+    private Reference application;
 
-	private Reference from;
+    @Deprecated
+    // attachments{title}
+    private String caption;
 
-	private String icon;
+    private Date createdTime;
 
-	private boolean isHidden;
-	
-	private boolean isPublished;
-	
-	private String link;
-	
-	private String message;
-	
-	private Map<Integer,List<MessageTag>> messageTags;
-	
-	private String name;
-	
-	private String objectId;
-	
-	private String picture;
+    @Deprecated
+    // attachments{description}
+    private String description;
 
-	private Page place;
-	
-	private Privacy privacy;
-	
-	private List<PostProperty> properties = new ArrayList<PostProperty>();
-	
-	private int sharesCount;
+    private Reference from;
 
-	private String source;
-	
-	private StatusType statusType;
+    private String icon;
 
-	private String story;
+    private boolean isHidden;
 
-	private List<Reference> to;
-	
-	private PostType type = PostType.UNKNOWN;
-	
-	private Date updatedTime;
+    private boolean isPublished;
 
-	private List<Reference> withTags;
-			
-	public String getId() {
-		return id;
-	}
+    @Deprecated
+    // attachments{unshimmed_url}
+    private String link;
 
-	public List<Action> getActions() {
-		return actions;
-	}
-	
-	public AdminCreator getAdminCreator() {
-		return adminCreator;
-	}
-	
-	public Reference getApplication() {
-		return application;
-	}
+    @Deprecated
+    private String message;
 
-	// TODO: public ? getCallToAction() { ... }
-	
-	public String getCaption() {
-		return caption;
-	}
-	
-	public Date getCreatedTime() {
-		return createdTime;
-	}
+    private Map<Integer, List<MessageTag>> messageTags;
 
-	public String getDescription() {
-		return description;
-	}
+    @Deprecated
+    // attachments{title}
+    private String name;
 
-	public Reference getFrom() {
-		return from;
-	}
+    @Deprecated
+    // attachments{target{id}}
+    private String objectId;
 
-	public String getIcon() {
-		return icon;
-	}
+    private String picture;
 
-	public boolean isHidden() {
-		return isHidden;
-	}
-	
-	public boolean isPublished() {
-		return isPublished;
-	}
-	
-	public String getLink() {
-		return link;
-	}
+    private Page place;
 
-	public String getMessage() {
-		return message;
-	}
+    private Privacy privacy;
 
-	public Map<Integer,List<MessageTag>> getMessageTags() {
-		return messageTags;
-	}
+    private List<PostProperty> properties = new ArrayList<PostProperty>();
 
-	public String getName() {
-		return name;
-	}
+    private int sharesCount;
 
-	public String getObjectId() {
-		return objectId;
-	}
-	
-	public String getPicture() {
-		return picture;
-	}
+    @Deprecated
+    // attachments{media{source}}
+    private String source;
 
-	public Page getPlace() {
-		return place;
-	}
-	
-	public Privacy getPrivacy() {
-		return privacy;
-	}
-	
-	public List<PostProperty> getProperties() {
-		return properties;
-	}
-	
-	public String getSource() {
-		return source;
-	}
-	
-	public StatusType getStatusType() {
-		return statusType;
-	}
-	
-	public String getStory() {
-		return story;
-	}
-	
-	public List<Reference> getTo() {
-		return to;
-	}
-	
-	public PostType getType() {
-		return type;
-	}
+    private StatusType statusType;
 
-	public void setType(PostType type) {
-		this.type = type;
-	}
+    private String story;
 
-	public Date getUpdatedTime() {
-		return updatedTime;
-	}
+    private List<Reference> to;
 
-	@Deprecated
-	public List<Reference> getWithTags() {
-		return withTags;
-	}
-	
-	public int getShares() {
-		return sharesCount;
-	}
-	
-	public static class AdminCreator {
-		
-		private String id;
-		
-		private String name;
-		
-		private String namespace;
-		
-		public String getId() {
-			return id;
+    @Deprecated
+    // attachments{media_type} If there is no attachments or media_type=link, the value is the same as
+    // attachments{type=status}.
+    private PostType type = PostType.UNKNOWN;
+
+    private Date updatedTime;
+
+    private List<Reference> withTags;
+
+    private List<StoryAttachment> attachments;
+
+    public String getId() {
+        return id;
+    }
+
+    public List<Action> getActions() {
+        return actions;
+    }
+
+    public AdminCreator getAdminCreator() {
+        return adminCreator;
+    }
+
+    public Reference getApplication() {
+        return application;
+    }
+
+    // TODO: public ? getCallToAction() { ... }
+
+    public String getCaption() {
+        if (caption == null) {
+            return Optional.ofNullable(attachments).map(attachments -> attachments.stream()
+                    .map(StoryAttachment::getTitle)
+                    .filter(Objects::nonNull)
+                    .findFirst().orElse(null)).orElse(null);
+        }
+        return caption;
+    }
+
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    public String getDescription() {
+		if (description == null) {
+			return Optional.ofNullable(attachments).map(attachments -> attachments.stream()
+					.map(StoryAttachment::getDescription)
+					.filter(Objects::nonNull)
+					.findFirst().orElse(null)).orElse(null);
 		}
-		
-		public String getName() {
-			return name;
-		}
-		
-		public String getNamespace() {
-			return namespace;
-		}
-		
-	}
-	
-	public static class Privacy {
-		
-		private String description;
-		
-		private PrivacyType value;
-		
-		private FriendsPrivacyType friends;
-		
-		private String networks;
-		
-		private String allow;
-		
-		private String deny;
-		
-		public String getDescription() {
-			return description;
-		}
-		
-		public PrivacyType getValue() {
-			return value;
-		}
-		
-		public FriendsPrivacyType getFriends() {
-			return friends;
-		}
-		
-		public String getNetworks() {
-			return networks;
-		}
-		
-		public String getAllow() {
-			return allow;
-		}
-		
-		public String getDeny() {
-			return deny;
-		}
-		
-	}
-	
-	public static enum PostType { LINK, STATUS, PHOTO, VIDEO, UNKNOWN }
-	
-	public static enum StatusType { MOBILE_STATUS_UPDATE, CREATED_NOTE, ADDED_PHOTOS, ADDED_VIDEO, SHARED_STORY, CREATED_GROUP, 
-		CREATED_EVENT, WALL_POST, APP_CREATED_STORY, PUBLISHED_STORY, TAGGED_IN_PHOTO, APPROVED_FRIEND, UNKNOWN }
-	
-	public static enum PrivacyType { EVERYONE, ALL_FRIENDS, FRIENDS_OF_FRIENDS, SELF, CUSTOM, UNKNOWN }
+        return description;
+    }
 
-	public static enum FriendsPrivacyType { ALL_FRIENDS, FRIENDS_OF_FRIENDS, SOME_FRIENDS, UNKNOWN }
+    public Reference getFrom() {
+        return from;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public boolean isHidden() {
+        return isHidden;
+    }
+
+    public boolean isPublished() {
+        return isPublished;
+    }
+
+    public String getLink() {
+		if (link == null) {
+			return Optional.ofNullable(attachments).map(attachments -> attachments.stream()
+					.map(StoryAttachment::getUnshimmedUrl)
+					.filter(Objects::nonNull)
+					.findFirst().orElse(null)).orElse(null);
+		}
+        return link;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Map<Integer, List<MessageTag>> getMessageTags() {
+        return messageTags;
+    }
+
+    public String getName() {
+		if (name == null) {
+			return Optional.ofNullable(attachments).map(attachments -> attachments.stream()
+					.map(StoryAttachment::getTitle)
+					.filter(Objects::nonNull)
+					.findFirst().orElse(null)).orElse(null);
+		}
+        return name;
+    }
+
+    public String getObjectId() {
+		if (objectId == null) {
+			return Optional.ofNullable(attachments).map(attachments -> attachments.stream()
+					.map(StoryAttachment::getTarget)
+					.filter(Objects::nonNull)
+					.map(StoryAttachment.StoryAttachmentTarget::getId)
+					.filter(Objects::nonNull)
+					.findFirst().orElse(null)).orElse(null);
+		}
+        return objectId;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public Page getPlace() {
+        return place;
+    }
+
+    public Privacy getPrivacy() {
+        return privacy;
+    }
+
+    public List<PostProperty> getProperties() {
+        return properties;
+    }
+
+    public String getSource() {
+		if (source == null) {
+			return Optional.ofNullable(attachments).map(attachments -> attachments.stream()
+					.map(StoryAttachment::getMedia)
+					.filter(Objects::nonNull)
+					.map(StoryAttachment.StoryAttachmentMedia::getSource)
+					.filter(Objects::nonNull)
+					.findFirst().orElse(null)).orElse(null);
+		}
+        return source;
+    }
+
+    public StatusType getStatusType() {
+        return statusType;
+    }
+
+    public String getStory() {
+        return story;
+    }
+
+    public List<Reference> getTo() {
+        return to;
+    }
+
+    public PostType getType() {
+        if (type.equals(PostType.UNKNOWN)) {
+            try {
+                return PostType.valueOf(Optional.ofNullable(attachments).map(attachments -> attachments.stream()
+                        .map(attachment -> {
+                            if (attachment.getMediaType() == null || attachment.getMediaType().equals("link")) {
+                                return attachment.getType();
+                            } else {
+                                return attachment.getMediaType();
+                            }
+                        })
+                        .filter(Objects::nonNull)
+                        .findFirst().orElse("unknown")).orElse("unknown").toUpperCase());
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        return type;
+    }
+
+    public void setType(PostType type) {
+        this.type = type;
+    }
+
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
+    @Deprecated
+    public List<Reference> getWithTags() {
+        return withTags;
+    }
+
+    public int getShares() {
+        return sharesCount;
+    }
+
+    public static class AdminCreator {
+
+        private String id;
+
+        private String name;
+
+        private String namespace;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getNamespace() {
+            return namespace;
+        }
+
+    }
+
+    public static class Privacy {
+
+        private String description;
+
+        private PrivacyType value;
+
+        private FriendsPrivacyType friends;
+
+        private String networks;
+
+        private String allow;
+
+        private String deny;
+
+        public String getDescription() {
+            return description;
+        }
+
+        public PrivacyType getValue() {
+            return value;
+        }
+
+        public FriendsPrivacyType getFriends() {
+            return friends;
+        }
+
+        public String getNetworks() {
+            return networks;
+        }
+
+        public String getAllow() {
+            return allow;
+        }
+
+        public String getDeny() {
+            return deny;
+        }
+
+    }
+
+    public static enum PostType {LINK, STATUS, PHOTO, VIDEO, UNKNOWN}
+
+    public static enum StatusType {
+        MOBILE_STATUS_UPDATE, CREATED_NOTE, ADDED_PHOTOS, ADDED_VIDEO, SHARED_STORY, CREATED_GROUP,
+        CREATED_EVENT, WALL_POST, APP_CREATED_STORY, PUBLISHED_STORY, TAGGED_IN_PHOTO, APPROVED_FRIEND, UNKNOWN
+    }
+
+    public static enum PrivacyType {EVERYONE, ALL_FRIENDS, FRIENDS_OF_FRIENDS, SELF, CUSTOM, UNKNOWN}
+
+    public static enum FriendsPrivacyType {ALL_FRIENDS, FRIENDS_OF_FRIENDS, SOME_FRIENDS, UNKNOWN}
 
 }

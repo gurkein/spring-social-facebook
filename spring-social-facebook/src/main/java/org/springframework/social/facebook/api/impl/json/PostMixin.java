@@ -21,17 +21,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
-import org.springframework.social.facebook.api.Action;
-import org.springframework.social.facebook.api.MessageTag;
-import org.springframework.social.facebook.api.Page;
+import org.springframework.social.facebook.api.*;
 import org.springframework.social.facebook.api.Post.AdminCreator;
 import org.springframework.social.facebook.api.Post.FriendsPrivacyType;
 import org.springframework.social.facebook.api.Post.PostType;
 import org.springframework.social.facebook.api.Post.Privacy;
 import org.springframework.social.facebook.api.Post.PrivacyType;
 import org.springframework.social.facebook.api.Post.StatusType;
-import org.springframework.social.facebook.api.PostProperty;
-import org.springframework.social.facebook.api.Reference;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -140,6 +136,10 @@ abstract class PostMixin extends FacebookObjectMixin {
 	@JsonProperty("shares")
 	@JsonDeserialize(using = CountDeserializer.class)
 	Integer sharesCount;
+
+	@JsonProperty("attachments")
+	@JsonDeserialize(using = StoryAttachmentListDeserializer.class)
+	List<StoryAttachment> attachments;
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public abstract static class AdminCreatorMixin {
