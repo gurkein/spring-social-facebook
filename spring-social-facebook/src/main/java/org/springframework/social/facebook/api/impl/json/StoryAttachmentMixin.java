@@ -17,7 +17,9 @@ package org.springframework.social.facebook.api.impl.json;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.social.facebook.api.ImageSource;
+import org.springframework.social.facebook.api.StoryAttachment;
 import org.springframework.social.facebook.api.StoryAttachment.StoryAttachmentMedia;
 import org.springframework.social.facebook.api.StoryAttachment.StoryAttachmentTarget;
 
@@ -53,6 +55,10 @@ abstract class StoryAttachmentMixin {
 
 	@JsonProperty("unshimmed_url")
 	String unshimmedUrl;
+
+	@JsonProperty("subattachments")
+	@JsonDeserialize(using = StoryAttachmentListDeserializer.class)
+	List<StoryAttachment> attachments;
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	static abstract class StoryAttachmentMediaMixin {

@@ -229,15 +229,17 @@ public interface PageOperations {
             "affiliation", "company_overview", "fan_count", "checkins", "cover"
     };
 
+    static final String[] APPSECRET_PROOF_FIELDS = {"parent_page", "best_page"};
+
     static final String[] ALL_PAGE_FIELDS = {
             "id", "about", "access_token", /*"business", */"can_checkin", "can_post", "category", "category_list", "checkins",
             "country_page_likes", "current_location", "description", "description_html", "emails", "engagement",
             "fan_count", "general_info", "global_brand_page_name", "global_brand_root_id", "has_added_app",
-            "instagram_business_account", "link", "name", "new_like_count", "parent_page", "phone",
+            "instagram_business_account", "link", "name", "new_like_count", "phone",
             "promotion_eligible", "promotion_ineligible_reason", "rating_count", "single_line_address",
             "talking_about_count", "unread_message_count", "unread_notif_count", "unseen_message_count", "username",
             "verification_status", "voip_info", "website", "were_here_count",
-            "affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members", "best_page",
+            "affiliation", "artists_we_like", "attire", "awards", "band_interests", "band_members",
             "birthday", "booking_agent", "built", "company_overview", "culinary_team", "directed_by", "features",
             "food_styles", "founded", "general_manager", "genre", "hometown", "influences", "location", "members",
             "mission", "mpg", "network", "overall_star_rating", "parking", "payment_options", "personal_info",

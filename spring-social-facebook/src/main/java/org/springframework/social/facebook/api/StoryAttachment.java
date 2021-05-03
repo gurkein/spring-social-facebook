@@ -43,6 +43,8 @@ public class StoryAttachment {
 
 	private String unshimmedUrl;
 
+	private List<StoryAttachment> subAttachments;
+
 	/**
 	 * @return the attachment title
 	 */
@@ -96,18 +98,12 @@ public class StoryAttachment {
 		return mediaType;
 	}
 
-	public StoryAttachment setMediaType(String mediaType) {
-		this.mediaType = mediaType;
-		return this;
-	}
-
 	public String getUnshimmedUrl() {
 		return unshimmedUrl;
 	}
 
-	public StoryAttachment setUnshimmedUrl(String unshimmedUrl) {
-		this.unshimmedUrl = unshimmedUrl;
-		return this;
+	public List<StoryAttachment> getSubAttachments() {
+		return subAttachments;
 	}
 
 	/**

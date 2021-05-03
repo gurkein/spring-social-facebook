@@ -242,7 +242,7 @@ public class Post extends FacebookObject {
             try {
                 return PostType.valueOf(Optional.ofNullable(attachments).map(attachments -> attachments.stream()
                         .map(attachment -> {
-                            if (attachment.getMediaType() == null || attachment.getMediaType().equals("link")) {
+                            if (attachment.getMediaType() == null) {
                                 return attachment.getType();
                             } else {
                                 return attachment.getMediaType();
@@ -271,6 +271,10 @@ public class Post extends FacebookObject {
 
     public int getShares() {
         return sharesCount;
+    }
+
+    public List<StoryAttachment> getAttachments() {
+        return attachments;
     }
 
     public static class AdminCreator {
