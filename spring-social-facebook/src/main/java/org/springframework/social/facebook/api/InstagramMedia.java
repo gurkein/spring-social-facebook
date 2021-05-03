@@ -13,6 +13,7 @@ public class InstagramMedia extends FacebookObject {
 
     private String caption;
 
+    // {CAROUSEL_ALBUM, IMAGE, VIDEO}
     private String mediaType;
 
     private String mediaUrl;
@@ -34,6 +35,11 @@ public class InstagramMedia extends FacebookObject {
     private Integer likeCount;
 
     private boolean isCommentEnabled;
+
+    // {AD, FEED, IGTV, STORY}
+    private String mediaProductType;
+
+    private String videoTitle;
 
     private List<InstagramMedia> children;
 
@@ -117,5 +123,13 @@ public class InstagramMedia extends FacebookObject {
 
     public boolean isCommentEnabled() {
         return isCommentEnabled;
+    }
+
+    public String getMediaProductType() {
+        return mediaProductType;
+    }
+
+    public String getVideoTitle() {
+        return videoTitle;
     }
 }

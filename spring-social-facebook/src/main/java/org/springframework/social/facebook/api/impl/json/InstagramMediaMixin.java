@@ -79,4 +79,11 @@ abstract class InstagramMediaMixin extends FacebookObjectMixin {
 
     @JsonProperty("is_comment_enabled")
     boolean isCommentEnabled;
+
+    @JsonProperty("media_product_type")
+    private String mediaProductType;
+
+    @JsonProperty("video_title")
+    private String videoTitle;
+
 }
