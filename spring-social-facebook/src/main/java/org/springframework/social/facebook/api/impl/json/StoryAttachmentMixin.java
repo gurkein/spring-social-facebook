@@ -58,7 +58,7 @@ abstract class StoryAttachmentMixin {
 
 	@JsonProperty("subattachments")
 	@JsonDeserialize(using = StoryAttachmentListDeserializer.class)
-	List<StoryAttachment> attachments;
+	List<StoryAttachment> subAttachments;
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	static abstract class StoryAttachmentMediaMixin {

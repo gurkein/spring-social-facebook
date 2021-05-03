@@ -247,7 +247,7 @@ public interface InstagramOperations {
 
     static final String[] BASIC_MEDIA_FIELDS = {
             "caption", "comments_count", "id", "ig_id", "like_count", "media_type", "media_url", "owner{" + StringUtils.arrayToCommaDelimitedString(BASIC_PROFILE_FIELDS) + "}", "permalink",
-            "shortcode", "thumbnail_url", "timestamp", "is_comment_enabled", "children{id,media_url,media_type,thumbnail_url}"
+            "shortcode", "thumbnail_url", "timestamp", "is_comment_enabled", "media_product_type", "video_title", "children{id,media_url,media_type,thumbnail_url}"
     };
 
     static final String[] SHADOW_MEDIA_FIELDS = {
