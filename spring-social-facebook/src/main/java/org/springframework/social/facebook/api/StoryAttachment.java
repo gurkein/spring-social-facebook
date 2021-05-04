@@ -28,7 +28,7 @@ public class StoryAttachment {
 
 	private String description;
 	
-	private List<String> descriptionTags;
+	private List<EntityAtTextRange> descriptionTags;
 	
 	private String type;
 	

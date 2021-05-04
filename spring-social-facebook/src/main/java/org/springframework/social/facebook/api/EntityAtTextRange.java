@@ -15,7 +15,7 @@
  */
 package org.springframework.social.facebook.api;
 
-public class MessageTag extends FacebookObject {
+public class EntityAtTextRange extends FacebookObject {
 
 	private final String id;
 	
@@ -27,7 +27,7 @@ public class MessageTag extends FacebookObject {
 	
 	private final Integer length;
 	
-	public MessageTag(String id, String name, String type, Integer offset, Integer length) {
+	public EntityAtTextRange(String id, String name, String type, Integer offset, Integer length) {
 		this.id = id;
 		this.name = name;
 		this.type = type;

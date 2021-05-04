@@ -94,7 +94,7 @@ public class FacebookModule extends SimpleModule {
 		context.setMixInAnnotations(Account.class, AccountMixin.class);
 		context.setMixInAnnotations(GroupMembership.class, GroupMembershipMixin.class);
 		context.setMixInAnnotations(FamilyMember.class, FamilyMemberMixin.class);
-		context.setMixInAnnotations(MessageTag.class, MessageTagMixin.class);
+		context.setMixInAnnotations(EntityAtTextRange.class, EntityAtTextRangeMixin.class);
 		context.setMixInAnnotations(CoverPhoto.class, CoverPhotoMixin.class);
 		
 		context.setMixInAnnotations(FriendList.class, FriendListMixin.class);

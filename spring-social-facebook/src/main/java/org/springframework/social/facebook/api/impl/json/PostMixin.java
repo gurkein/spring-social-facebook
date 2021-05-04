@@ -87,8 +87,8 @@ abstract class PostMixin extends FacebookObjectMixin {
 	String message;
 	
 	@JsonProperty("message_tags")
-	@JsonDeserialize(using=MessageTagMapDeserializer.class)
-	Map<Integer,List<MessageTag>> messageTags;
+	@JsonDeserialize(using= EntityAtTextRangeMapDeserializer.class)
+	Map<Integer, List<EntityAtTextRange>> messageTags;
 	
 	@JsonProperty("name")
 	String name;

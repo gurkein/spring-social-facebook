@@ -25,10 +25,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-abstract class MessageTagMixin extends FacebookObjectMixin {
+abstract class EntityAtTextRangeMixin extends FacebookObjectMixin {
 	
 	@JsonCreator
-	MessageTagMixin(
+	EntityAtTextRangeMixin(
 			@JsonProperty("id") String id, 
 			@JsonProperty("name") String name,
 			@JsonProperty("type") String type,

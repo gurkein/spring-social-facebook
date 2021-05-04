@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class Comment extends FacebookObject {
 	
-	private static final List<MessageTag> EMPTY_TAG_LIST = Collections.emptyList();
+	private static final List<EntityAtTextRange> EMPTY_TAG_LIST = Collections.emptyList();
 	
 	private String id;
 	
@@ -50,7 +50,7 @@ public class Comment extends FacebookObject {
 	
 	private String message;
 	
-	private List<MessageTag> messageTags;
+	private List<EntityAtTextRange> messageTags;
 
 	private Comment parent;
 
@@ -174,7 +174,7 @@ public class Comment extends FacebookObject {
 	/**
 	 * @return a list of tags in the comment's message
 	 */
-	public List<MessageTag> getMessageTags() {
+	public List<EntityAtTextRange> getMessageTags() {
 		return messageTags != null ? messageTags : EMPTY_TAG_LIST;
 	}
 

@@ -36,7 +36,7 @@ abstract class StoryAttachmentMixin {
 	String description;
 	
 	@JsonProperty("description_tags")
-	List<String> descriptionTags;
+	List<EntityAtTextRange> descriptionTags;
 	
 	@JsonProperty("type")
 	String type;

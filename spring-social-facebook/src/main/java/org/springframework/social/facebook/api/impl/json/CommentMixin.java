@@ -66,7 +66,7 @@ abstract class CommentMixin extends FacebookObjectMixin {
 	String message;
 	
 	@JsonProperty("message_tags")
-	List<MessageTag> messageTags;
+	List<EntityAtTextRange> messageTags;
 	
 	@JsonProperty("parent")
 	Comment parent;

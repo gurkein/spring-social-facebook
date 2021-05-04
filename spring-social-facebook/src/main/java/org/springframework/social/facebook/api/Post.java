@@ -58,7 +58,7 @@ public class Post extends FacebookObject {
     @Deprecated
     private String message;
 
-    private Map<Integer, List<MessageTag>> messageTags;
+    private Map<Integer, List<EntityAtTextRange>> messageTags;
 
     @Deprecated
     // attachments{title}
@@ -173,7 +173,7 @@ public class Post extends FacebookObject {
         return message;
     }
 
-    public Map<Integer, List<MessageTag>> getMessageTags() {
+    public Map<Integer, List<EntityAtTextRange>> getMessageTags() {
         return messageTags;
     }
 
