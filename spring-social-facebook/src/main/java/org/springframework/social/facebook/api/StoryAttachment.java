@@ -62,7 +62,7 @@ public class StoryAttachment {
 	/**
 	 * @return a list of profiles tagged in the text accompanying the attachment
 	 */
-	public List<String> getDescriptionTags() {
+	public List<EntityAtTextRange> getDescriptionTags() {
 		return descriptionTags;
 	}
 	
