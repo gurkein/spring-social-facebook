@@ -13,8 +13,8 @@ public class Conversation extends FacebookObject {
     private Date updatedTime;
     private int messageCount;
     private int unreadCount;
-    private List<Reference> participants;
-    private List<Reference> senders;
+    private List<ExtendedReference> participants;
+    private List<ExtendedReference> senders;
     private boolean canReply;
     private boolean isSubscribed;
     private String link;
@@ -39,11 +39,11 @@ public class Conversation extends FacebookObject {
         return unreadCount;
     }
 
-    public List<Reference> getParticipants() {
+    public List<ExtendedReference> getParticipants() {
         return participants;
     }
 
-    public List<Reference> getSenders() {
+    public List<ExtendedReference> getSenders() {
         return senders;
     }
 

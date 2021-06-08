@@ -120,6 +120,7 @@ public class FacebookModule extends SimpleModule {
 		
 		context.setMixInAnnotations(ProfilePictureSource.class, ProfilePictureSourceMixin.class);
 
+		context.setMixInAnnotations(ExtendedReference.class, ExtendedReferenceMixin.class);
 		context.setMixInAnnotations(Conversation.class, ConversationMixin.class);
 		context.setMixInAnnotations(Message.class, MessageMixin.class);
 

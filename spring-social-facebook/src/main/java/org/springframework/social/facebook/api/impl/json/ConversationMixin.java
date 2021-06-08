@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
-import org.springframework.social.facebook.api.Reference;
+import org.springframework.social.facebook.api.ExtendedReference;
 
 import java.util.Date;
 import java.util.List;
@@ -49,12 +49,12 @@ abstract class ConversationMixin extends FacebookObjectMixin {
     int unreadCount;
 
     @JsonProperty
-    @JsonDeserialize(using = ReferenceListDeserializer.class)
-    List<Reference> participants;
+    @JsonDeserialize(using = ExtendedReferenceListDeserializer.class)
+    List<ExtendedReference> participants;
 
     @JsonProperty
-    @JsonDeserialize(using = ReferenceListDeserializer.class)
-    List<Reference> senders;
+    @JsonDeserialize(using = ExtendedReferenceListDeserializer.class)
+    List<ExtendedReference> senders;
 
     @JsonProperty("can_reply")
     boolean canReply;

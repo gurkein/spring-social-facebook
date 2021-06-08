@@ -394,7 +394,7 @@ public interface FeedOperations {
 
 	static final String[] ALL_POST_FIELDS = {
 			"id", "actions", "admin_creator", "application", "created_time", "from{id,name,picture}", "icon",
-			"is_hidden", "is_published", "message", "message_tags", "picture", "place", "can_reply_privately",
+			"is_hidden", "is_published", "message", "message_tags", "picture", "place",// "can_reply_privately", // this can give error
 			"privacy", "properties", "status_type", "story", "to", "updated_time", "shares",
 			"attachments{description,description_tags,title,type,url,unshimmed_url,media,target,media_type,subattachments}",
 			"likes.limit(0).summary(1)", "comments.order(reverse_chronological).filter(stream).limit(0).summary(1)", "reactions.limit(0).summary(1)"

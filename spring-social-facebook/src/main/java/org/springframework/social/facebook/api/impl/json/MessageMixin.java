@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.jonpeterson.jackson.module.interceptor.JsonInterceptors;
-import org.springframework.social.facebook.api.Reference;
+import org.springframework.social.facebook.api.ExtendedReference;
 
 import java.util.Date;
 import java.util.List;
@@ -40,7 +40,7 @@ abstract class MessageMixin extends FacebookObjectMixin {
     private Date createdTime;
 
     @JsonProperty
-    private Reference from;
+    private ExtendedReference from;
 
     @JsonProperty
     private String message;
@@ -49,7 +49,7 @@ abstract class MessageMixin extends FacebookObjectMixin {
     private String subject;
 
     @JsonProperty
-    @JsonDeserialize(using = ReferenceListDeserializer.class)
-    private List<Reference> to;
+    @JsonDeserialize(using = ExtendedReferenceListDeserializer.class)
+    private List<ExtendedReference> to;
 
 }

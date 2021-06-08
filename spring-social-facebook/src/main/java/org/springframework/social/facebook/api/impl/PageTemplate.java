@@ -128,8 +128,21 @@ class PageTemplate implements PageOperations {
 		return graphApi.fetchConnections(pageId, "conversations", Conversation.class, params, ALL_CONVERSATION_FIELDS);
 	}
 
+	public PagedList<Conversation> getIgConversations(String pageId, PagingParameters pagedListParameters) {
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("platform", "instagram");
+		return graphApi.fetchConnections(pageId, "conversations", Conversation.class, params, ALL_CONVERSATION_FIELDS);
+	}
+
 	public PagedList<Conversation> getConversations(String pageId, String userId, PagingParameters pagedListParameters) {
 		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("user_id", userId);
+		return graphApi.fetchConnections(pageId, "conversations", Conversation.class, params, ALL_CONVERSATION_FIELDS);
+	}
+
+	public PagedList<Conversation> getIgConversations(String pageId, String userId, PagingParameters pagedListParameters) {
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		params.set("platform", "instagram");
 		params.set("user_id", userId);
 		return graphApi.fetchConnections(pageId, "conversations", Conversation.class, params, ALL_CONVERSATION_FIELDS);
 	}
@@ -137,6 +150,11 @@ class PageTemplate implements PageOperations {
 	public PagedList<Message> getConversationMessages(String conversationId, PagingParameters pagedListParameters) {
 		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
 		return graphApi.fetchConnections(conversationId, "messages", Message.class, params, ALL_MESSAGE_FIELDS);
+	}
+
+	public PagedList<Message> getIgConversationMessages(String conversationId, PagingParameters pagedListParameters) {
+		MultiValueMap<String, String> params = getPagingParameters(pagedListParameters);
+		return graphApi.fetchConnections(conversationId, "messages", Message.class, params, ALL_IG_MESSAGE_FIELDS);
 	}
 
 	@Override
@@ -147,6 +165,11 @@ class PageTemplate implements PageOperations {
 	@Override
 	public Message getMessage(String messageId) {
 		return graphApi.fetchObject(messageId, Message.class, ALL_MESSAGE_FIELDS);
+	}
+
+	@Override
+	public Message getIgMessage(String messageId) {
+		return graphApi.fetchObject(messageId, Message.class, ALL_IG_MESSAGE_FIELDS);
 	}
 
 	public String postConversationMessage(String conversationId, String message) {

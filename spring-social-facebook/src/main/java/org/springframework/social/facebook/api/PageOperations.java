@@ -182,11 +182,28 @@ public interface PageOperations {
 	/**
 	 *
 	 * @param pageId
-	 * @param userId
+	 * @param pagedListParameters
+	 * @return
+	 */
+	PagedList<Conversation> getIgConversations(String pageId, PagingParameters pagedListParameters);
+
+	/**
+	 *
+	 * @param pageId
+	 * @param userId PSID
 	 * @param pagedListParameters
 	 * @return
 	 */
 	PagedList<Conversation> getConversations(String pageId, String userId, PagingParameters pagedListParameters);
+
+	/**
+	 *
+	 * @param pageId
+	 * @param userId IGSID
+	 * @param pagedListParameters
+	 * @return
+	 */
+	PagedList<Conversation> getIgConversations(String pageId, String userId, PagingParameters pagedListParameters);
 
 	/**
 	 *
@@ -208,6 +225,20 @@ public interface PageOperations {
 	 * @return
 	 */
 	Message getMessage(String messageId);
+
+	/**
+	 *
+	 * @param conversationId
+	 * @return
+	 */
+	PagedList<Message> getIgConversationMessages(String conversationId, PagingParameters pagedListParameters);
+
+	/**
+	 *
+	 * @param messageId
+	 * @return
+	 */
+	Message getIgMessage(String messageId);
 
 	/**
 	 *
@@ -258,5 +289,11 @@ public interface PageOperations {
     static final String[] ALL_MESSAGE_FIELDS = {
 			"id", "created_time", "from", "message", "to", "sticker", "tags",
 			"attachments{id,image_data,mime_type,name,size,video_data,file_url}", "shares{id,link,description,name}"
+	};
+
+    static final String[] ALL_IG_MESSAGE_FIELDS = {
+			"id", "created_time", "from", "message", "to", "sticker", "tags",
+			"attachments{id,image_data,mime_type,name,size,video_data,file_url}", "shares{id,link,description,name}",
+			"story", "reactions"
 	};
 }

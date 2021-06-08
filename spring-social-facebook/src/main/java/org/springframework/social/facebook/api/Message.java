@@ -11,11 +11,11 @@ import java.util.List;
 public class Message extends FacebookObject {
     private String id;
     private Date createdTime;
-    private Reference from;
+    private ExtendedReference from;
     private String message;
     @Deprecated
     private String subject;
-    private List<Reference> to;
+    private List<ExtendedReference> to;
 
     public String getId() {
         return id;
@@ -25,7 +25,7 @@ public class Message extends FacebookObject {
         return createdTime;
     }
 
-    public Reference getFrom() {
+    public ExtendedReference getFrom() {
         return from;
     }
 
@@ -37,7 +37,7 @@ public class Message extends FacebookObject {
         return subject;
     }
 
-    public List<Reference> getTo() {
+    public List<ExtendedReference> getTo() {
         return to;
     }
 }

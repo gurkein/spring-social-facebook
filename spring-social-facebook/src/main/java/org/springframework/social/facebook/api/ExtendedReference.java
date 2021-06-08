@@ -15,40 +15,33 @@
  */
 package org.springframework.social.facebook.api;
 
-import java.io.Serializable;
+public class ExtendedReference extends Reference {
 
-/**
- * A simple reference to another Facebook object without the complete set of object data.
- *
- * @author Craig Walls
- */
-@SuppressWarnings("serial")
-public class Reference extends FacebookObject implements Serializable {
+    private String userId;
 
-    protected String id;
+    private String username;
 
-	protected String name;
-
-    @SuppressWarnings("unused")
-    protected Reference() {
-        this(null, null);
+    public String getUserId() {
+        return userId;
     }
 
-    public Reference(String id) {
-        this(id, null);
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public Reference(String id, String name) {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
 }
